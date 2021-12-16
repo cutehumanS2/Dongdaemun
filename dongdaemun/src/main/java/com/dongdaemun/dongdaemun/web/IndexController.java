@@ -23,4 +23,11 @@ public class IndexController {
         }
         return "index";
     }
+
+    @GetMapping("/editor")
+    public String editor(Model model) {
+        //model.addAttribute("posts", postsService.findAllDesc());
+
+        return "/smarteditor/newPost";
+    }
 }
