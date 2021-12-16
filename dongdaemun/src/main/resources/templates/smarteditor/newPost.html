@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
+    <title>Title</title>
+</head>
+<body>
+
+
+<h3>Naver Smart Editor 2.0</h3>
+<form action="insertStudentInfoForm" method="post">
+    <div id="smarteditor">
+            <textarea name="editorTxt" id="editorTxt"
+                      rows="20" cols="10"
+                      placeholder="내용을 입력해주세요"
+                      style="width: 500px"></textarea>
+    </div>
+    <input type="button" onclick=submitPost() value="제출"></input>
+</form>
+<script type="text/javascript">
+        let oEditors = []
+
+        smartEditor = function() {
+            console.log("Naver SmartEditor")
+            nhn.husky.EZCreator.createInIFrame({
+                oAppRef: oEditors,
+                elPlaceHolder: "editorTxt",
+                sSkinURI: "smarteditor/SmartEditor2Skin.html",
+                fCreator: "createSEditor2"
+            })
+        }
+
+        $(document).ready(function() { smartEditor() })
+
+         function submitPost() {
+            oEditors.getById["editorTxt"].exec("UPDATE_CONTENTS_FIELD", [])
+            let content = document.getElementById("editorTxt").value
+            if(content == '') {
+                alert("내용을 입력해주세요.")
+                oEditors.getById["editorTxt"].exec("FOCUS")
+                return
+            } else {
+                console.log(content)
+            }
+        }
+
+    </script>
+</body>
+
+</html>
