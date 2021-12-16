@@ -25,7 +25,7 @@ public class User extends BaseTimeEntity {
     @Column
     private String picture;
 
-    @Column(nullable = false)
+    @Column
     private String club;
 
     @Enumerated(EnumType.STRING) // 1.
@@ -37,7 +37,7 @@ public class User extends BaseTimeEntity {
         this.name = name;
         this.email = email;
         this.picture = picture;
-        this.club = club;
+        this.club = "GDSC Sookmyung";
         this.role = role;
     }
 
