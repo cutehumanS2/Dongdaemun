@@ -30,14 +30,14 @@
             nhn.husky.EZCreator.createInIFrame({
                 oAppRef: oEditors,
                 elPlaceHolder: "editorTxt",
-                sSkinURI: "smarteditor/SmartEditor2Skin.html",
+                sSkinURI: "/smarteditor/SmartEditor2Skin.html",
                 fCreator: "createSEditor2"
             })
         }
 
         $(document).ready(function() { smartEditor() })
 
-      savePost = function() {
+savePost = function() {
         oEditors.getById["editorTxt"].exec("UPDATE_CONTENTS_FIELD", [])
         let content = document.getElementById("editorTxt").value
         let title = document.getElementById("title").value
