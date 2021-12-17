@@ -12,17 +12,17 @@
 
 
 <h3>Naver Smart Editor 2.0</h3>
-<form action="insertStudentInfoForm" method="post">
+<form action="/submit" method="post" id="frm">
     <div id="smarteditor">
             <textarea name="title" id="title"
-                  placeholder="제목을 입력해주세요"></textarea>
-            <p th:text="${userEmail}" name="uid" id="uid"></p>
-            <textarea name="editorTxt" id="editorTxt"
-                      rows="20" cols="10"
-                      placeholder="내용을 입력해주세요"
-                      style="width: 500px"></textarea>
+                      placeholder="제목을 입력해주세요"></textarea>
+        <p th:text="${userEmail}" name="uid" id="uid"></p>
+        <textarea name="editorTxt" id="editorTxt"
+                  rows="20" cols="10"
+                  placeholder="내용을 입력해주세요"
+                  style="width: 500px"></textarea>
     </div>
-    <input type="button" onclick=savePost() value="제출"></input>
+    <input type="button" id="savebutton" onclick="savePost()" value="제출"></input>
 </form>
 <script type="text/javascript">
         let oEditors = []
@@ -39,7 +39,8 @@
 
         $(document).ready(function() { smartEditor() })
 
-savePost = function() {
+    // 전송 버튼
+    savePost = function() {
         oEditors.getById["editorTxt"].exec("UPDATE_CONTENTS_FIELD", [])
         let content = document.getElementById("editorTxt").value
         let title = document.getElementById("title").value
@@ -74,7 +75,6 @@ savePost = function() {
             })
       }
 }
-
 
 
     </script>

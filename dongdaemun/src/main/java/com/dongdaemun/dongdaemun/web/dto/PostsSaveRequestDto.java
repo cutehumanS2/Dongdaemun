@@ -1,4 +1,4 @@
-package com.dongdaemun.dongdaemun.config.auth.dto;
+package com.dongdaemun.dongdaemun.web.dto;
 
 import com.dongdaemun.dongdaemun.domain.posts.Posts;
 import lombok.Builder;
