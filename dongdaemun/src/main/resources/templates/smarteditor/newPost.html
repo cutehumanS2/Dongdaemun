@@ -17,6 +17,7 @@
             <textarea name="title" id="title"
                       placeholder="제목을 입력해주세요"></textarea>
         <p th:text="${userEmail}" name="uid" id="uid"></p>
+        <p th:text="${category}" name="category" id="category"></p>
         <textarea name="editorTxt" id="editorTxt"
                   rows="20" cols="10"
                   placeholder="내용을 입력해주세요"
@@ -46,6 +47,7 @@
         let title = document.getElementById("title").value
         let uid = document.getElementById("uid").innerText
         let anony = false;
+        let category = document.getElementById("category").innerText
 
         if(content == '') {
             alert("내용을 입력해주세요.")
@@ -62,7 +64,7 @@
                 anony: anony
                 }
               $.ajax({
-                 url: "/smarteditor/savePost",
+                 url: "/postsave/"+category,
                  type: 'POST',
                  dataType:'json',
                  data:  JSON.stringify(posts),

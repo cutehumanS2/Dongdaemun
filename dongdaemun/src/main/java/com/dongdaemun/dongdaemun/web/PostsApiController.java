@@ -7,7 +7,10 @@ import com.dongdaemun.dongdaemun.web.dto.PostsListResponseDto;
 import com.dongdaemun.dongdaemun.web.dto.PostsResponseDto;
 import com.dongdaemun.dongdaemun.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RequiredArgsConstructor
 @RestController
@@ -21,11 +24,21 @@ public class PostsApiController {
     }
 
     /*게시글 조회*/
+    @GetMapping("/postview/{category}/{id}")
+    public PostsResponseDto postview(@PathVariable String category, @PathVariable Long id){
+        if(category.compareTo("notice")==0) return postsService.findById(id);
+        else return null;
+    }
+
+
+    /*
     @GetMapping("/posts/{id}")
     public PostsResponseDto findById(@PathVariable Long id){
 
         return postsService.findById(id);
     }
+
+     */
 
     /*게시글 삭제*/
     @DeleteMapping("/api/v1/posts/{id}")
