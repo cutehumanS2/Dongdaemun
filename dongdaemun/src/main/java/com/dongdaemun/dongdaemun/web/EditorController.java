@@ -1,6 +1,8 @@
 package com.dongdaemun.dongdaemun.web;
 
+import com.dongdaemun.dongdaemun.config.auth.LoginUser;
 import com.dongdaemun.dongdaemun.config.auth.dto.PostsSaveRequestDto;
+import com.dongdaemun.dongdaemun.config.auth.dto.SessionUser;
 import com.dongdaemun.dongdaemun.service.PostsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +22,10 @@ public class EditorController {
 
 
     @RequestMapping("/smarteditor")
-    public ModelAndView insertEditor(ModelMap model) throws Exception {
+    public ModelAndView insertEditor(ModelMap model, @LoginUser SessionUser user) throws Exception {
+        if (user != null) {
+            model.addAttribute("userEmail", user.getEmail());
+        }
         ModelAndView mav = new ModelAndView("smarteditor/newPost");
 
         return mav;
