@@ -1,7 +1,7 @@
 package com.dongdaemun.dongdaemun.service;
 
 
-import com.dongdaemun.dongdaemun.config.auth.dto.PostsSaveRequestDto;
+import com.dongdaemun.dongdaemun.web.dto.PostsSaveRequestDto;
 import com.dongdaemun.dongdaemun.domain.posts.Posts;
 import com.dongdaemun.dongdaemun.domain.posts.PostsRepository;
 import com.dongdaemun.dongdaemun.web.dto.PostsListResponseDto;
