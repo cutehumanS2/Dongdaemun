@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<!--<html lang="en" xmlns="http://www.w3.org/1999/html">-->
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -14,7 +16,7 @@
     <div id="smarteditor">
             <textarea name="title" id="title"
                   placeholder="제목을 입력해주세요"></textarea>
-            <p name="uid" id="uid">cute</p>
+            <p th:text="${userEmail}" name="uid" id="uid"></p>
             <textarea name="editorTxt" id="editorTxt"
                       rows="20" cols="10"
                       placeholder="내용을 입력해주세요"
