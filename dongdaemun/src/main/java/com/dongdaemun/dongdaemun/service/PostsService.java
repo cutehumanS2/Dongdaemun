@@ -2,7 +2,10 @@ package com.dongdaemun.dongdaemun.service;
 
 
 import com.dongdaemun.dongdaemun.config.auth.dto.PostsSaveRequestDto;
+import com.dongdaemun.dongdaemun.domain.posts.Posts;
 import com.dongdaemun.dongdaemun.domain.posts.PostsRepository;
+import com.dongdaemun.dongdaemun.web.dto.PostsListResponseDto;
+import com.dongdaemun.dongdaemun.web.dto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,7 +32,7 @@ public class PostsService {
         posts.update(requestDto.getTitle(), requestDto.getContent());
 
         return id;
-    }
+    }*/
 
     public PostsResponseDto findById (Long id){
         Posts entity = postsRepository.findById(id)
@@ -38,6 +41,7 @@ public class PostsService {
         return new PostsResponseDto(entity);
     }
 
+
     @Transactional(readOnly = true) //트랜잭션 범위는 유지하되, 조회기능만 남겨둠 ~> 조회 속도 개선
     public List<PostsListResponseDto> findAllDesc(){
         return postsRepository.findAllDesc().stream()
@@ -45,6 +49,7 @@ public class PostsService {
                 .collect(Collectors.toList());
     }
 
+     /*
     @Transactional
     public void delete (Long id) {
         Posts posts = postsRepository.findById(id)
