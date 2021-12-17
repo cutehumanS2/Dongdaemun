@@ -30,8 +30,9 @@ public class EditorController {
     PostsService postService;
 
 
+    /*
     @RequestMapping("/smarteditor")
-    public ModelAndView insertEditor(ModelMap model, @LoginUser SessionUser user) throws Exception {
+    public ModelAndView insertEditor(ModelMap model, @LoginUser SessionUser user, @PathVariable String category) throws Exception {
         if (user != null) {
             model.addAttribute("userEmail", user.getEmail());
         }
@@ -39,7 +40,20 @@ public class EditorController {
 
         return mav;
     }
+    */
 
+    @RequestMapping("/postwrite/{category}")
+    public ModelAndView insertEditor(ModelMap model, @LoginUser SessionUser user, @PathVariable String category) throws Exception {
+        if (user != null) {
+            model.addAttribute("userEmail", user.getEmail());
+            model.addAttribute("category", category);
+        }
+        ModelAndView mav = new ModelAndView("smarteditor/newPost");
+
+        return mav;
+    }
+
+    /*
     @ResponseBody
     @RequestMapping(value="/smarteditor/savePost", method = RequestMethod.POST)
     public View savePost(@RequestBody PostsSaveRequestDto requestDto) throws Exception {
@@ -50,6 +64,19 @@ public class EditorController {
 
         return new MappingJackson2JsonView();
     }
+     */
+
+
+    @ResponseBody
+    @RequestMapping(value="/postsave/{category}", method = RequestMethod.POST)
+    public View savePost(@RequestBody PostsSaveRequestDto requestDto, @PathVariable String category) throws Exception {
+        ModelMap model = new ModelMap();
+        model.addAttribute("result", HttpStatus.OK);
+        if(category.compareTo("notice")==0) postService.save(requestDto);
+
+        return new MappingJackson2JsonView();
+    }
+
 
     //단일파일업로드
     @RequestMapping("/singlePhotoUpload")
