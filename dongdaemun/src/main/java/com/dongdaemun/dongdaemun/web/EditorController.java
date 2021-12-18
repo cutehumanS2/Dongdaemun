@@ -53,20 +53,6 @@ public class EditorController {
         return mav;
     }
 
-    /*
-    @ResponseBody
-    @RequestMapping(value="/smarteditor/savePost", method = RequestMethod.POST)
-    public View savePost(@RequestBody PostsSaveRequestDto requestDto) throws Exception {
-        ModelMap model = new ModelMap();
-        model.addAttribute("result", HttpStatus.OK);
-
-        postService.save(requestDto);
-
-        return new MappingJackson2JsonView();
-    }
-     */
-
-
     @ResponseBody
     @RequestMapping(value="/postsave/{category}", method = RequestMethod.POST)
     public View savePost(@RequestBody PostsSaveRequestDto requestDto, @PathVariable String category) throws Exception {
