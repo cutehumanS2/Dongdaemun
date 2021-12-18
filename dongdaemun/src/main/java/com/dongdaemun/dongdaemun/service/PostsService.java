@@ -8,6 +8,10 @@ import com.dongdaemun.dongdaemun.web.dto.PostsListResponseDto;
 import com.dongdaemun.dongdaemun.web.dto.PostsResponseDto;
 import com.dongdaemun.dongdaemun.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,14 +46,18 @@ public class PostsService {
         return new PostsResponseDto(entity);
     }
 
-
+    /*
     @Transactional(readOnly = true)
     public List<PostsListResponseDto> findAllDesc(){
         return postsRepository.findAllDesc().stream()
                 .map(PostsListResponseDto::new)
                 .collect(Collectors.toList());
-    }
+    }*/
 
+    @Transactional
+    public Page<Posts> list(int page){
+        return postsRepository.findAll(PageRequest.of(page,3,Sort.by(Sort.Direction.DESC, "id")));
+    }
 
     @Transactional
     public void delete (Long id) {
