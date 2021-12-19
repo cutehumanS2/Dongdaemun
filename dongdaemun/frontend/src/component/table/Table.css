@@ -1,0 +1,23 @@
+.table {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    border-spacing: 0;
+  }
+   
+  .table-header-column {
+    border-bottom: 1px solid #c6e5f3;
+    padding: 10%;
+    font-size: 16%;
+    padding: 10% 5%;
+    font-weight: bold;
+  }
+   
+  .table-row:hover {
+    background-color: #eceaea;
+    cursor: pointer;
+  }
+   
+  .table-column {
+    padding: 10% 5%;
+  }

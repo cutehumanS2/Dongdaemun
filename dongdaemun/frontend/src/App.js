@@ -1,26 +1,34 @@
 import React, {useState, useEffect} from 'react';
-import logo from './logo.svg';
 import './App.css';
+import PostMain from './page/post/PostMain';
+import { Carousel, Modal, Navbar, Container, Row, Col, Button,Alert,Breadcrumb, BreadcrumbItem, Card, Form, Nav } from 'react-bootstrap';
+import Pagination from './page/post/Pagination';
+import mypageComment from './page/post/mypageComment';
+import mypagePost from './page/post/mypagePost';
+import { BrowserRouter as BrowserRouter, Route, Routes, Link } from 'react-router-dom';
+import Notice from './page/post/Notice';
+
+
 function App () {
-const [message, setMessage] = useState("");
-useEffect(() => {
-fetch('/api/hello')
-.then(response => response.text())
-.then(message => {
-setMessage(message);
-});
-},[])
 return (
-<div className="App">
-<header className="App-header">
-<img src={logo} className="App-logo" alt="logo"/>
-<h1 className="App-title">{message}</h1>
-</header>
-<p className="App-intro">
-To get started, edit <code>src/App.js</code> and save to reload.
-</p>
-</div>
-)
+  <div className="App">
+    <BrowserRouter>
+      <div className='Menu-wrapper'>
+            <Link to='/notice'><li>Notice</li></Link>
+            <Link to='/mypagecomment'><li>mypageComment</li></Link>
+            <Link to='/mypagepost'><li>mypagePost</li></Link>
+        </div>
+        <div className='Contents-wrapper'>
+      <Routes>
+        <Route path='/notice' element={<Notice/>}></Route>
+        <Route path='/mypagecomment' element={<mypageComment/>}></Route>
+        <Route path='/mypagepost' element={<mypagePost/>}></Route>
+      </Routes>
+      </div>
+    </BrowserRouter>
+  </div>
+  )
 }
+
 export default App;
 
