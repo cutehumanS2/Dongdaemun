@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!--<html lang="en" xmlns="http://www.w3.org/1999/html">-->
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
+    <title>Title</title>
+</head>
+<body>
+
+
+<h3>Naver Smart Editor 2.0</h3>
+<form action="/submit" method="post" id="frm">
+    <div id="smarteditor">
+            <textarea name="title" id="title"
+                      placeholder="제목을 입력해주세요"></textarea>
+        <p th:text="${userEmail}" name="uid" id="uid"></p>
+        <p th:text="${category}" name="category" id="category"></p>
+        <textarea name="editorTxt" id="editorTxt"
+                  rows="20" cols="10"
+                  placeholder="내용을 입력해주세요"
+                  style="width: 500px"></textarea>
+    </div>
+    <input type="button" id="savebutton" onclick="savePost()" value="제출"></input>
+</form>
+<script type="text/javascript">
+        let oEditors = []
+
+        smartEditor = function() {
+            console.log("Naver SmartEditor")
+            nhn.husky.EZCreator.createInIFrame({
+                oAppRef: oEditors,
+                elPlaceHolder: "editorTxt",
+                sSkinURI: "/smarteditor/SmartEditor2Skin.html",
+                fCreator: "createSEditor2"
+            })
+        }
+
+        $(document).ready(function() { smartEditor() })
+
+    // 전송 버튼
+    savePost = function() {
+        oEditors.getById["editorTxt"].exec("UPDATE_CONTENTS_FIELD", [])
+        let content = document.getElementById("editorTxt").value
+        let title = document.getElementById("title").value
+        let uid = document.getElementById("uid").innerText
+        let anony = false;
+        let category = document.getElementById("category").innerText
+
+        if(content == '') {
+            alert("내용을 입력해주세요.")
+            oEditors.getById["editorTxt"].exec("FOCUS")
+            return
+            } else {
+               console.log(content)
+               console.log(title)
+               console.log(uid)
+               let posts = {
+                uid: uid,
+                title: title,
+                content: content,
+                anony: anony
+                }
+              $.ajax({
+                 url: "/postsave/"+category,
+                 type: 'POST',
+                 dataType:'json',
+                 data:  JSON.stringify(posts),
+                 contentType: 'application/json; charset=utf-8',
+                 success: function(data){console.log(content);console.log('성공'); alert('저장');
+              }, error: function(jqXHR, textStatus, errorThrown){
+                console.log(jqXHR);
+                alert('오류');
+              }
+            })
+      }
+}
+
+
+    </script>
+</body>
+
+</html>
