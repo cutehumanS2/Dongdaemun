@@ -1,4 +1,6 @@
 import React from 'react'
+import './Mypage.css';
+
 // import { Link } from "react-router-dom"
 
 function Mypage() {
@@ -29,22 +31,28 @@ function Mypage() {
     })
 
   return (
-    <div>
-      <div>{clubName}</div>
-      <div>{user}</div>        
-      <div>
-        <button>로그아웃</button>            
-        <button>회원 탈퇴</button>            
+    <div className='MyPage'>
+      <div className='userInfo'>
+        <div className='clubUser'>
+          <div className='clubName'>{clubName}</div>
+          <div className='user'>{user}</div>        
+        </div>
+        <div>
+          <button className='logout btn'>로그아웃</button>            
+          <button className='exit btn'>회원 탈퇴</button>            
+        </div>
       </div>
 
-      <div>내가 쓴 글</div>
-      <p>더보기</p>
-      <div>{renderPosts}</div>
-      <div>내가 쓴 댓글</div>
-      <p>더보기</p>
-      <div>{renderPosts}</div>
-
-
+      <div className='bar'>
+        <div>내가 쓴 글</div>
+        <div>더보기</div>
+      </div>
+      <div className='postContainer'>{renderPosts}</div>
+      <div className='bar'>
+        <div>내가 쓴 댓글</div>
+        <div>더보기</div>
+      </div>
+      <div className='postContainer'>{renderPosts}</div>
     </div>
   )
 }
