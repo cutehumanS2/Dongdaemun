@@ -1,8 +1,7 @@
 package com.dongdaemun.dongdaemun;
 
-import com.dongdaemun.dongdaemun.domain.posts.Posts;
-import com.dongdaemun.dongdaemun.domain.posts.PostsRepository;
-import com.dongdaemun.dongdaemun.web.dto.PostsSaveRequestDto;
+import com.dongdaemun.dongdaemun.domain.posts.NoticePosts;
+import com.dongdaemun.dongdaemun.domain.posts.NoticePostsRepository;
 import com.dongdaemun.dongdaemun.web.dto.PostsUpdateRequestDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.After;
@@ -40,7 +39,7 @@ public class PostsApiControllerTest {
     private TestRestTemplate restTemplate;
 
     @Autowired
-    private PostsRepository postsRepository;
+    private NoticePostsRepository postsRepository;
 
     @Autowired
     private WebApplicationContext context;
@@ -91,7 +90,7 @@ public class PostsApiControllerTest {
     @WithMockUser(roles="USER")
     public void Posts_수정된다() throws Exception {
         //given
-        Posts savedPosts = postsRepository.save(Posts.builder()
+        NoticePosts savedPosts = postsRepository.save(NoticePosts.builder()
                 .title("title")
                 .content("content")
                 .uid("uid")
@@ -115,7 +114,7 @@ public class PostsApiControllerTest {
                 .andExpect(status().isOk());
 
         //then
-        List<Posts> all = postsRepository.findAll();
+        List<NoticePosts> all = postsRepository.findAll();
         assertThat(all.get(0).getTitle()).isEqualTo(expectedTitle);
         assertThat(all.get(0).getContent()).isEqualTo(expectedContent);
     }
@@ -124,7 +123,7 @@ public class PostsApiControllerTest {
     @WithMockUser(roles="USER")
     public void Posts_삭제된다() throws Exception{
         //given
-        Posts savedPosts = postsRepository.save(Posts.builder()
+        NoticePosts savedPosts = postsRepository.save(NoticePosts.builder()
                 .title("title")
                 .content("content")
                 .uid("uid")
@@ -142,7 +141,7 @@ public class PostsApiControllerTest {
                 .andExpect(status().isOk());
 
         // then
-        List<Posts> postsList = postsRepository.findAll();
+        List<NoticePosts> postsList = postsRepository.findAll();
         assertThat(postsList == null);
 
 

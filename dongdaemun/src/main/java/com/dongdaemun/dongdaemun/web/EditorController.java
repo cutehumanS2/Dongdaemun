@@ -1,22 +1,23 @@
 package com.dongdaemun.dongdaemun.web;
 
 import com.dongdaemun.dongdaemun.config.auth.LoginUser;
-import com.dongdaemun.dongdaemun.domain.posts.Posts;
+import com.dongdaemun.dongdaemun.domain.posts.AnonyPosts;
+import com.dongdaemun.dongdaemun.domain.posts.NoticePosts;
+import com.dongdaemun.dongdaemun.service.ActivityPostsService;
+import com.dongdaemun.dongdaemun.service.AnonyPostsService;
 import com.dongdaemun.dongdaemun.web.dto.PostsSaveRequestDto;
 import com.dongdaemun.dongdaemun.web.dto.PhotosSaveRequestDto;
 
 import com.dongdaemun.dongdaemun.config.auth.dto.SessionUser;
-import com.dongdaemun.dongdaemun.service.PostsService;
+import com.dongdaemun.dongdaemun.service.NoticePostsService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
-import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,12 +25,13 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.UUID;
 
-
+@RequiredArgsConstructor
 @Controller
 public class EditorController {
 
-    @Autowired
-    PostsService postService;
+    private final NoticePostsService noticePostsService;
+    private final AnonyPostsService anonyPostsService;
+    private final ActivityPostsService activityPostsService;
 
 
     /*
@@ -57,13 +59,18 @@ public class EditorController {
 
     @ResponseBody
     @PostMapping("/postsave/{category}")
-    public ResponseEntity<Posts> savePost(@RequestBody PostsSaveRequestDto requestDto, @PathVariable String category) throws Exception{
+    public ResponseEntity<?> savePost(@RequestBody PostsSaveRequestDto requestDto, @PathVariable String category) throws Exception{
         if(category.compareTo("notice")==0){
             return ResponseEntity.ok()
-                    .body(postService.save(requestDto));}//서비스에서 Long을 리턴함... 바꿔줘야 하는디 ..
+                    .body(noticePostsService.save(requestDto));}
+        else if(category.compareTo("anony")==0){
+            return ResponseEntity.ok()
+                    .body(anonyPostsService.save(requestDto));}
+        else if(category.compareTo("activity")==0){
+            return ResponseEntity.ok()
+                    .body(activityPostsService.save(requestDto));}
         else return null;
     }
-
 
     //단일파일업로드
     @RequestMapping("/singlePhotoUpload")

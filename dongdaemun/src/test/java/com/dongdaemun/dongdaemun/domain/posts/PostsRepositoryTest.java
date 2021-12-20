@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest // 4.
 public class PostsRepositoryTest {
     @Autowired
-    PostsRepository postsRepository;
+    NoticePostsRepository postsRepository;
 
     @After // 1.
     public void cleanup(){
@@ -34,7 +33,7 @@ public class PostsRepositoryTest {
         String content = "테스트 본문";
         boolean anony = false;
 
-        postsRepository.save(Posts.builder()
+        postsRepository.save(NoticePosts.builder()
                 .title(title)
                 .content(content)
                 .uid(uid)
@@ -42,10 +41,10 @@ public class PostsRepositoryTest {
                 .build());
 
         //when
-        List<Posts> postsList = postsRepository.findAll();
+        List<NoticePosts> postsList = postsRepository.findAll();
 
         //then
-        Posts posts = postsList.get(0);
+        NoticePosts posts = postsList.get(0);
         assertThat(posts.getTitle()).isEqualTo(title);
         assertThat(posts.getContent()).isEqualTo(content);
         assertThat(posts.getUid()).isEqualTo(uid);

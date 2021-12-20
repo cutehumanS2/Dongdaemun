@@ -1,6 +1,8 @@
 package com.dongdaemun.dongdaemun.web.dto;
 
-import com.dongdaemun.dongdaemun.domain.posts.Posts;
+import com.dongdaemun.dongdaemun.domain.posts.ActivityPosts;
+import com.dongdaemun.dongdaemun.domain.posts.AnonyPosts;
+import com.dongdaemun.dongdaemun.domain.posts.NoticePosts;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -14,7 +16,7 @@ public class PostsListResponseDto {
     private boolean anony;
     private LocalDateTime modifiedDate;
 
-    public PostsListResponseDto(Posts entity){
+    public PostsListResponseDto(NoticePosts entity){
         this.id = entity.getId();
         this.uid = entity.getUid();
         this.title = entity.getTitle();
@@ -22,4 +24,23 @@ public class PostsListResponseDto {
         this.anony = entity.isAnony();
         this.modifiedDate = entity.getModifieDate();
     }
+
+    public PostsListResponseDto(AnonyPosts entity){
+        this.id = entity.getId();
+        this.uid = entity.getUid();
+        this.title = entity.getTitle();
+        this.content = entity.getContent();
+        this.anony = entity.isAnony();
+        this.modifiedDate = entity.getModifieDate();
+    }
+
+    public PostsListResponseDto(ActivityPosts entity){
+        this.id = entity.getId();
+        this.uid = entity.getUid();
+        this.title = entity.getTitle();
+        this.content = entity.getContent();
+        this.anony = entity.isAnony();
+        this.modifiedDate = entity.getModifieDate();
+    }
+
 }
