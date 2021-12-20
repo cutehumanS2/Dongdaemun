@@ -24,7 +24,7 @@ public class PostsApiController {
 
     /*게시글 수정*/
     // 조회와 같은 기능. 프론트가 제이슨 데이터를 받아서 뿌려줘야함
-    @GetMapping("/postupdate/{category}/{id}")
+    @GetMapping("/update/{category}/{id}")
     public ResponseEntity<PostsResponseDto> update(@PathVariable String category, @PathVariable Long id){
         if(category.compareTo("notice")==0){
             return ResponseEntity.ok()
@@ -41,7 +41,7 @@ public class PostsApiController {
     /* 게시글 수정 */
     // 게시글 저장(savepost)와 같은 기능. 변경된 내용을 프론트가 받아서 전송하면
     // 그 내용을 db에 저장함
-    @PutMapping("/postupdate/{category}/{id}")
+    @PutMapping("/update/{category}/{id}")
     public ResponseEntity<?> update(@PathVariable String category, @PathVariable Long id, @RequestBody PostsUpdateRequestDto updateRequestDto){
         if(category.compareTo("notice")==0){
             return ResponseEntity.ok()
@@ -56,7 +56,7 @@ public class PostsApiController {
     }
 
     /*게시글 조회*/
-    @GetMapping("/postview/{category}/{id}")
+    @GetMapping("/view/{category}/{id}")
     public ResponseEntity<PostsResponseDto> postview(@PathVariable String category, @PathVariable Long id){
         if(category.compareTo("notice")==0){
             return ResponseEntity.ok()
@@ -71,7 +71,7 @@ public class PostsApiController {
     }
 
     // board/notice?page=0
-    @GetMapping("/board/{category}")
+    @GetMapping("/list/{category}")
     public ResponseEntity<?> list(Model model, @PathVariable String category, @RequestParam(required = false, defaultValue = "0", value = "page") int page){
 
         Page<?> listPage = null; int totalPage;
@@ -93,24 +93,9 @@ public class PostsApiController {
         //ModelAndView mav = new ModelAndView("list");
         return new ResponseEntity<>(model, HttpStatus.OK);
     }
-/*
-    @GetMapping("/board/{category}")
-    public ModelAndView list(Model model, @RequestParam(required = false, defaultValue = "0", value = "page") int page){
-        Page<Posts> listPage = postsService.list(page);
-
-        int totalPage = listPage.getTotalPages();
-
-        model.addAttribute("posts", listPage.getContent());
-        model.addAttribute("totalPage", totalPage);
-
-        ModelAndView mav = new ModelAndView("list");
-        return mav;
-    }
-
- */
 
     /*게시글 삭제*/
-    @DeleteMapping("/postdelete/{category}/{id}")
+    @DeleteMapping("/delete/{category}/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id, @PathVariable String category){
 
         if(category.compareTo("notice")==0) {

@@ -27,26 +27,13 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 @Controller
-public class EditorController {
+public class PostsEditApiController {
 
     private final NoticePostsService noticePostsService;
     private final AnonyPostsService anonyPostsService;
     private final ActivityPostsService activityPostsService;
 
-
-    /*
-    @RequestMapping("/smarteditor")
-    public ModelAndView insertEditor(ModelMap model, @LoginUser SessionUser user, @PathVariable String category) throws Exception {
-        if (user != null) {
-            model.addAttribute("userEmail", user.getEmail());
-        }
-        ModelAndView mav = new ModelAndView("smarteditor/newPost");
-
-        return mav;
-    }
-    */
-
-    @RequestMapping("/postwrite/{category}")
+    @GetMapping("/write/{category}")
     public ModelAndView insertEditor(ModelMap model, @LoginUser SessionUser user, @PathVariable String category) throws Exception {
         if (user != null) {
             model.addAttribute("userEmail", user.getEmail());
@@ -58,7 +45,7 @@ public class EditorController {
     }
 
     @ResponseBody
-    @PostMapping("/postsave/{category}")
+    @PostMapping("/save/{category}")
     public ResponseEntity<?> savePost(@RequestBody PostsSaveRequestDto requestDto, @PathVariable String category) throws Exception{
         if(category.compareTo("notice")==0){
             return ResponseEntity.ok()
@@ -72,7 +59,7 @@ public class EditorController {
         else return null;
     }
 
-    //단일파일업로드
+    //단일 파일 업로드
     @RequestMapping("/singlePhotoUpload")
     public String singlePhotoUploader(HttpServletRequest request, PhotosSaveRequestDto requestDto) throws UnsupportedEncodingException {
         String callback = requestDto.getCallback();
@@ -108,7 +95,7 @@ public class EditorController {
         return "redirect:" + callback + "?callback_func="+callback_func+file_result;
     }
 
-    //다중파일업로드
+    //다중 파일 업로드
     @RequestMapping("/multiplePhotoUpload")
     public void multiplePhotoUploader(HttpServletRequest request, HttpServletResponse response){
         try {
