@@ -1,6 +1,7 @@
 package com.dongdaemun.dongdaemun.domain.posts;
 
 import com.dongdaemun.dongdaemun.domain.BaseTimeEntity;
+import com.dongdaemun.dongdaemun.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,9 +15,11 @@ public class AnonyPosts extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@Column(columnDefinition = "id")
     private Long id;
 
-    @Column(nullable = false)
+    //@ManyToOne
+    //@JoinColumn(name ="userFK")
     private String uid; //작성자 아이디
 
     @Column(length = 500, nullable = false)

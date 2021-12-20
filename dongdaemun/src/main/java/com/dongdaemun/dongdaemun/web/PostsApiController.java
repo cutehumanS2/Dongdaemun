@@ -1,12 +1,12 @@
 package com.dongdaemun.dongdaemun.web;
 
-import com.dongdaemun.dongdaemun.domain.posts.AnonyPosts;
-import com.dongdaemun.dongdaemun.domain.posts.NoticePosts;
-import com.dongdaemun.dongdaemun.service.ActivityPostsService;
-import com.dongdaemun.dongdaemun.service.AnonyPostsService;
-import com.dongdaemun.dongdaemun.service.NoticePostsService;
-import com.dongdaemun.dongdaemun.web.dto.PostsResponseDto;
-import com.dongdaemun.dongdaemun.web.dto.PostsUpdateRequestDto;
+import com.dongdaemun.dongdaemun.service.posts.ActivityPostsService;
+import com.dongdaemun.dongdaemun.service.posts.AnonyPostsService;
+import com.dongdaemun.dongdaemun.service.posts.NoticePostsService;
+import com.dongdaemun.dongdaemun.web.dto.posts.PostsAndCommentsPageResponseDto;
+import com.dongdaemun.dongdaemun.web.dto.posts.PostsAndCommentsResponseDto;
+import com.dongdaemun.dongdaemun.web.dto.posts.PostsResponseDto;
+import com.dongdaemun.dongdaemun.web.dto.posts.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -22,19 +22,23 @@ public class PostsApiController {
     private final ActivityPostsService activityPostsService;
 
 
-    /*게시글 수정*/
-    // 조회와 같은 기능. 프론트가 제이슨 데이터를 받아서 뿌려줘야함
+    /* 게시글 수정 */
+    // 조회와 같은 기능. 단, 댓글은 안가져오고 게시글만 가져옴
+    // 프론트가 제이슨 데이터를 받아서 뿌려줘야함
     @GetMapping("/update/{category}/{id}")
     public ResponseEntity<PostsResponseDto> update(@PathVariable String category, @PathVariable Long id){
         if(category.compareTo("notice")==0){
             return ResponseEntity.ok()
                     .body(noticePostsService.findById(id));}
+        /*
         else if(category.compareTo("anony")==0){
             return ResponseEntity.ok()
                     .body(anonyPostsService.findById(id));}
         else if(category.compareTo("activity")==0){
             return ResponseEntity.ok()
                     .body(activityPostsService.findById(id));}
+
+         */
         else return null;
     }
 
@@ -46,7 +50,7 @@ public class PostsApiController {
         if(category.compareTo("notice")==0){
             return ResponseEntity.ok()
                     .body(noticePostsService.update(id, updateRequestDto));}
-        else if(category.compareTo("notice")==0){
+        else if(category.compareTo("anony")==0){
             return ResponseEntity.ok()
                     .body(anonyPostsService.update(id, updateRequestDto));}
         else if(category.compareTo("activity")==0){
@@ -55,18 +59,42 @@ public class PostsApiController {
         else return null;
     }
 
-    /*게시글 조회*/
-    @GetMapping("/view/{category}/{id}")
-    public ResponseEntity<PostsResponseDto> postview(@PathVariable String category, @PathVariable Long id){
+    /* 게시글 조회 */
+    // 댓글 전체 조회
+    @GetMapping("/view/{category}/{id}/scroll")
+    public ResponseEntity<PostsAndCommentsResponseDto> postview(@PathVariable String category, @PathVariable Long id){
         if(category.compareTo("notice")==0){
             return ResponseEntity.ok()
-                    .body(noticePostsService.findById(id));}
+                    .body(noticePostsService.findPostAndCommentsById(id));}
+        /*
         else if(category.compareTo("anony")==0){
             return ResponseEntity.ok()
                     .body(anonyPostsService.findById(id));}
         else if(category.compareTo("activity")==0){
             return ResponseEntity.ok()
                     .body(activityPostsService.findById(id));}
+
+         */
+        else return null;
+    }
+
+    /* 게시글 조회 */
+    // 댓글 페이징 조회
+    @GetMapping("/view/{category}/{id}")
+    public ResponseEntity<PostsAndCommentsPageResponseDto> postview(@PathVariable String category, @PathVariable Long id
+    , @RequestParam(required = false, defaultValue = "0", value = "commentPage") int page){
+        if(category.compareTo("notice")==0){
+            return ResponseEntity.ok()
+                    .body(noticePostsService.findPostsAndCommentsWithPageById(id, page));}
+        /*
+        else if(category.compareTo("anony")==0){
+            return ResponseEntity.ok()
+                    .body(anonyPostsService.findById(id));}
+        else if(category.compareTo("activity")==0){
+            return ResponseEntity.ok()
+                    .body(activityPostsService.findById(id));}
+
+         */
         else return null;
     }
 
@@ -94,7 +122,7 @@ public class PostsApiController {
         return new ResponseEntity<>(model, HttpStatus.OK);
     }
 
-    /*게시글 삭제*/
+    /* 게시글 삭제 */
     @DeleteMapping("/delete/{category}/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id, @PathVariable String category){
 

@@ -1,17 +1,14 @@
 package com.dongdaemun.dongdaemun.web;
 
 import com.dongdaemun.dongdaemun.config.auth.LoginUser;
-import com.dongdaemun.dongdaemun.domain.posts.AnonyPosts;
-import com.dongdaemun.dongdaemun.domain.posts.NoticePosts;
-import com.dongdaemun.dongdaemun.service.ActivityPostsService;
-import com.dongdaemun.dongdaemun.service.AnonyPostsService;
-import com.dongdaemun.dongdaemun.web.dto.PostsSaveRequestDto;
-import com.dongdaemun.dongdaemun.web.dto.PhotosSaveRequestDto;
+import com.dongdaemun.dongdaemun.service.posts.ActivityPostsService;
+import com.dongdaemun.dongdaemun.service.posts.AnonyPostsService;
+import com.dongdaemun.dongdaemun.web.dto.posts.PostsSaveRequestDto;
+import com.dongdaemun.dongdaemun.web.dto.posts.PhotosSaveRequestDto;
 
 import com.dongdaemun.dongdaemun.config.auth.dto.SessionUser;
-import com.dongdaemun.dongdaemun.service.NoticePostsService;
+import com.dongdaemun.dongdaemun.service.posts.NoticePostsService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

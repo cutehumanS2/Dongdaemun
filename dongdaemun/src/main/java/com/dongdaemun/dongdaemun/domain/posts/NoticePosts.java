@@ -1,6 +1,7 @@
 package com.dongdaemun.dongdaemun.domain.posts;
 
 import com.dongdaemun.dongdaemun.domain.BaseTimeEntity;
+import com.dongdaemun.dongdaemun.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,9 +14,11 @@ import javax.persistence.*;
 public class NoticePosts extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@Column(name="POST_ID")
     private Long id;
 
-    @Column(nullable = false)
+    //@ManyToOne
+    //@JoinColumn(name ="userFK")
     private String uid; //작성자 아이디
     
     @Column(length = 500, nullable = false)
@@ -27,16 +30,16 @@ public class NoticePosts extends BaseTimeEntity {
     @Column
     private boolean anony; //익명 여부
 
-    //이미지는 .. 어카지
-    //private String img;
-
-
     @Builder
     public NoticePosts(String title, String content, String uid, boolean anony){
         this.title = title;
         this.content = content;
         this.uid = uid;
         this.anony = anony;
+    }
+
+    public NoticePosts(Long id){
+        this.id=id;
     }
 
     public NoticePosts update(String title, String content){

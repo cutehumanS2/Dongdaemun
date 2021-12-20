@@ -2,7 +2,7 @@ package com.dongdaemun.dongdaemun;
 
 import com.dongdaemun.dongdaemun.domain.posts.NoticePosts;
 import com.dongdaemun.dongdaemun.domain.posts.NoticePostsRepository;
-import com.dongdaemun.dongdaemun.web.dto.PostsUpdateRequestDto;
+import com.dongdaemun.dongdaemun.web.dto.posts.PostsUpdateRequestDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.After;
 import org.junit.Before;
