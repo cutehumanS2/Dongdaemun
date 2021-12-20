@@ -1,6 +1,7 @@
 package com.dongdaemun.dongdaemun.web;
 
 import com.dongdaemun.dongdaemun.config.auth.LoginUser;
+import com.dongdaemun.dongdaemun.domain.posts.Posts;
 import com.dongdaemun.dongdaemun.web.dto.PostsSaveRequestDto;
 import com.dongdaemun.dongdaemun.web.dto.PhotosSaveRequestDto;
 
@@ -8,6 +9,7 @@ import com.dongdaemun.dongdaemun.config.auth.dto.SessionUser;
 import com.dongdaemun.dongdaemun.service.PostsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -54,13 +56,12 @@ public class EditorController {
     }
 
     @ResponseBody
-    @RequestMapping(value="/postsave/{category}", method = RequestMethod.POST)
-    public View savePost(@RequestBody PostsSaveRequestDto requestDto, @PathVariable String category) throws Exception {
-        ModelMap model = new ModelMap();
-        model.addAttribute("result", HttpStatus.OK);
-        if(category.compareTo("notice")==0) postService.save(requestDto);
-
-        return new MappingJackson2JsonView();
+    @PostMapping("/postsave/{category}")
+    public ResponseEntity<Posts> savePost(@RequestBody PostsSaveRequestDto requestDto, @PathVariable String category) throws Exception{
+        if(category.compareTo("notice")==0){
+            return ResponseEntity.ok()
+                    .body(postService.save(requestDto));}//서비스에서 Long을 리턴함... 바꿔줘야 하는디 ..
+        else return null;
     }
 
 

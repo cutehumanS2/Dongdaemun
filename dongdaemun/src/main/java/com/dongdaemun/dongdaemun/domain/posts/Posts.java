@@ -39,8 +39,9 @@ public class Posts extends BaseTimeEntity {
         this.anony = anony;
     }
 
-    public void update(String title, String content){
+    public Posts update(String title, String content){
         this.title = title;
         this.content = content;
+        return this;
     }
 }
