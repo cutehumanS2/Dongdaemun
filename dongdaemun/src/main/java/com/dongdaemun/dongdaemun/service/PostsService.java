@@ -24,19 +24,16 @@ public class PostsService {
     private final PostsRepository postsRepository;
 
     @Transactional
-    public Long save(PostsSaveRequestDto requestDto){
-        return postsRepository.save(requestDto.toEntity()).getId();
+    public Posts save(PostsSaveRequestDto requestDto){ //Long -> Posts로 바꾸면 되나.. getId() 지우고?
+        return postsRepository.save(requestDto.toEntity());
     }
 
-
     @Transactional
-    public Long update(Long id, PostsUpdateRequestDto requestDto){
+    public Posts update(Long id, PostsUpdateRequestDto requestDto){
         Posts posts = postsRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
 
-        posts.update(requestDto.getTitle(), requestDto.getContent());
-
-        return id;
+        return posts.update(requestDto.getTitle(), requestDto.getContent());
     }
 
     public PostsResponseDto findById (Long id){

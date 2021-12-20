@@ -14,7 +14,7 @@ public class PostsSaveRequestDto {
     private boolean anony;
 
     @Builder
-    public PostsSaveRequestDto(String title, String content, String author, String uid, boolean anony){
+    public PostsSaveRequestDto(String title, String content, String uid, boolean anony){
         this.title = title;
         this.content = content;
         this.uid = uid;
