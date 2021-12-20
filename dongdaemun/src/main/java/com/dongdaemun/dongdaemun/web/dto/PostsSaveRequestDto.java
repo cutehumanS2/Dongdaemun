@@ -1,6 +1,8 @@
 package com.dongdaemun.dongdaemun.web.dto;
 
-import com.dongdaemun.dongdaemun.domain.posts.Posts;
+import com.dongdaemun.dongdaemun.domain.posts.ActivityPosts;
+import com.dongdaemun.dongdaemun.domain.posts.AnonyPosts;
+import com.dongdaemun.dongdaemun.domain.posts.NoticePosts;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,8 +23,26 @@ public class PostsSaveRequestDto {
         this.anony = anony;
     }
 
-    public Posts toEntity(){
-        return Posts.builder()
+    public NoticePosts toEntityNotice(){
+        return NoticePosts.builder()
+                .title(title)
+                .content(content)
+                .uid(uid)
+                .anony(anony)
+                .build();
+    }
+
+    public AnonyPosts toEntityAnony(){
+        return AnonyPosts.builder()
+                .title(title)
+                .content(content)
+                .uid(uid)
+                .anony(anony)
+                .build();
+    }
+
+    public ActivityPosts toEntityActivity(){
+        return ActivityPosts.builder()
                 .title(title)
                 .content(content)
                 .uid(uid)
@@ -30,4 +50,3 @@ public class PostsSaveRequestDto {
                 .build();
     }
 }
-
