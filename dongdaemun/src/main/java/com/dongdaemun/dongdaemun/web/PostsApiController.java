@@ -30,7 +30,6 @@ public class PostsApiController {
         if(category.compareTo("notice")==0){
             return ResponseEntity.ok()
                     .body(noticePostsService.findById(id));}
-        /*
         else if(category.compareTo("anony")==0){
             return ResponseEntity.ok()
                     .body(anonyPostsService.findById(id));}
@@ -38,7 +37,6 @@ public class PostsApiController {
             return ResponseEntity.ok()
                     .body(activityPostsService.findById(id));}
 
-         */
         else return null;
     }
 
@@ -66,15 +64,13 @@ public class PostsApiController {
         if(category.compareTo("notice")==0){
             return ResponseEntity.ok()
                     .body(noticePostsService.findPostAndCommentsById(id));}
-        /*
         else if(category.compareTo("anony")==0){
             return ResponseEntity.ok()
-                    .body(anonyPostsService.findById(id));}
+                    .body(anonyPostsService.findPostAndCommentsById(id));}
         else if(category.compareTo("activity")==0){
             return ResponseEntity.ok()
-                    .body(activityPostsService.findById(id));}
+                    .body(activityPostsService.findPostAndCommentsById(id));}
 
-         */
         else return null;
     }
 
@@ -86,15 +82,13 @@ public class PostsApiController {
         if(category.compareTo("notice")==0){
             return ResponseEntity.ok()
                     .body(noticePostsService.findPostsAndCommentsWithPageById(id, page));}
-        /*
         else if(category.compareTo("anony")==0){
             return ResponseEntity.ok()
-                    .body(anonyPostsService.findById(id));}
+                    .body(anonyPostsService.findPostsAndCommentsWithPageById(id, page));}
         else if(category.compareTo("activity")==0){
             return ResponseEntity.ok()
-                    .body(activityPostsService.findById(id));}
+                    .body(activityPostsService.findPostsAndCommentsWithPageById(id, page));}
 
-         */
         else return null;
     }
 
