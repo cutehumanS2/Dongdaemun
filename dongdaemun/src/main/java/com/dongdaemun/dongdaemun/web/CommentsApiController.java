@@ -24,25 +24,24 @@ public class CommentsApiController {
     }
 
     /* 댓글 수정 */
-    // 이거 어차피 수정할 때 조회하는거로만 쓰이는데 getmapping updateCmt로 바꾸는건 어떄
-    @GetMapping("/updateCmt/{category}/{pid}/{cid}")
-    public ResponseEntity<CommentsResponseDto> getCmt(@PathVariable String category, @PathVariable Long pid, @PathVariable Long cid){
+    @GetMapping("/updateCmt")
+    public ResponseEntity<CommentsResponseDto> getCmt(@RequestParam("category") String category, @RequestParam("pid") Long pid, @RequestParam("cid") Long cid){
         return ResponseEntity.ok()
                 .body(commentsService.findById(cid));
     }
 
 
     /* 댓글 수정 */
-    @PutMapping("/updateCmt/{category}/{pid}/{cid}")
-    public ResponseEntity<?> update(@PathVariable String category, @PathVariable Long pid, @PathVariable Long cid, @RequestBody CommentsUpdateRequestDto
+    @PutMapping("/updateCmt")
+    public ResponseEntity<?> update(@RequestParam("category") String category, @RequestParam("pid") Long pid, @RequestParam("cid") Long cid, @RequestBody CommentsUpdateRequestDto
             updateRequestDto){
         return ResponseEntity.ok()
                 .body(commentsService.update(cid, updateRequestDto));}
 
 
     /* 댓글 삭제 */
-    @DeleteMapping("/deleteCmt/{category}/{pid}/{cid}")
-    public ResponseEntity<?> delete(@PathVariable String category, @PathVariable Long pid, @PathVariable Long cid){
+    @DeleteMapping("/deleteCmt")
+    public ResponseEntity<?> delete(@RequestParam("category") String category, @RequestParam("pid") Long pid, @RequestParam("cid") Long cid){
         commentsService.delete(cid);
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);

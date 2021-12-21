@@ -26,8 +26,8 @@ public class PostsEditApiController {
 
     private final PostsService postsService;
 
-    @GetMapping("/write/{category}")
-    public ModelAndView insertEditor(ModelMap model, @LoginUser SessionUser user, @PathVariable String category) throws Exception {
+    @GetMapping("/write")
+    public ModelAndView insertEditor(ModelMap model, @LoginUser SessionUser user, @RequestParam("category") String category) throws Exception {
         if (user != null) {
             model.addAttribute("userEmail", user.getEmail());
             model.addAttribute("category", category);
@@ -38,8 +38,8 @@ public class PostsEditApiController {
     }
 
     @ResponseBody
-    @PostMapping("/save/{category}")
-    public ResponseEntity<?> savePost(@RequestBody PostsSaveRequestDto requestDto, @PathVariable String category) throws Exception{
+    @PostMapping("/save")
+    public ResponseEntity<?> savePost(@RequestBody PostsSaveRequestDto requestDto, @RequestParam("category") String category) throws Exception{
         return ResponseEntity.ok()
                 .body(postsService.save(requestDto));
     }
