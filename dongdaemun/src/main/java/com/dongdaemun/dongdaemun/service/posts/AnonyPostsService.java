@@ -21,7 +21,7 @@ import java.util.List;
 public class AnonyPostsService {
 
     private final AnonyPostsRepository anonyPostsRepository;
-    //private final AnonyCommentsRepository anonyCommentsRepository;
+    private final AnonyCommentsRepository anonyCommentsRepository;
 
     @Transactional
     public AnonyPosts save(PostsSaveRequestDto requestDto){
@@ -37,7 +37,7 @@ public class AnonyPostsService {
     }
 
     // 조회 : 게시글과 전체 댓글
-    /*
+
     @Transactional
     public PostsAndCommentsResponseDto findPostAndCommentsById(Long id){
         AnonyPosts postsEntity = anonyPostsRepository.findById(id)
@@ -47,11 +47,10 @@ public class AnonyPostsService {
 
         return new PostsAndCommentsResponseDto(postsEntity, commentsEntity);
     }
-     */
+
 
 
     // 조회 : 게시글과 페이징 처리 댓글
-        /*
     @Transactional
     public PostsAndCommentsPageResponseDto findPostsAndCommentsWithPageById(Long id, int page){
         AnonyPosts postsEntity = anonyPostsRepository.findById(id)
@@ -60,7 +59,13 @@ public class AnonyPostsService {
 
         return new PostsAndCommentsPageResponseDto(postsEntity, commentsPageEntity);
     }
-         */
+
+    @Transactional
+    public PostsResponseDto findById(Long id){
+        AnonyPosts postsEntity = anonyPostsRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id="+id));
+        return new PostsResponseDto(postsEntity);
+    }
 
     // 게시판 페이징 조회
     @Transactional
@@ -69,12 +74,12 @@ public class AnonyPostsService {
     }
 
     // 댓글 페이징 조회
-    /*
+
     @Transactional
     public Page<AnonyComments> listComments(int page){
         return anonyCommentsRepository.findAll(PageRequest.of(page,10, Sort.by(Sort.Direction.DESC, "cmtId")));
     }
-     */
+
 
     @Transactional
     public void delete (Long id) {
