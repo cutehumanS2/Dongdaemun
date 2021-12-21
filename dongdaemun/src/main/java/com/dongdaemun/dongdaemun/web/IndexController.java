@@ -2,7 +2,6 @@ package com.dongdaemun.dongdaemun.web;
 
 import com.dongdaemun.dongdaemun.config.auth.LoginUser;
 import com.dongdaemun.dongdaemun.config.auth.dto.SessionUser;
-import com.dongdaemun.dongdaemun.service.posts.NoticePostsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
