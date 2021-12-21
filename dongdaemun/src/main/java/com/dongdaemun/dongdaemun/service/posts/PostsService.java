@@ -1,5 +1,7 @@
 package com.dongdaemun.dongdaemun.service.posts;
 
+import com.dongdaemun.dongdaemun.domain.comments.Comments;
+import com.dongdaemun.dongdaemun.domain.comments.CommentsRepository;
 import com.dongdaemun.dongdaemun.domain.posts.Posts;
 import com.dongdaemun.dongdaemun.domain.posts.PostsRepository;
 import com.dongdaemun.dongdaemun.web.dto.posts.*;
@@ -11,12 +13,14 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class PostsService {
 
     private final PostsRepository postsRepository;
-    //private final CommentsRepository commentsRepository;
+    private final CommentsRepository commentsRepository;
 
     @Transactional
     public Posts save(PostsSaveRequestDto requestDto){
@@ -32,7 +36,7 @@ public class PostsService {
     }
 
     // 조회 : 게시글과 전체 댓글
-    /*
+
     @Transactional
     public PostsAndCommentsResponseDto findPostAndCommentsById(Long id){
         Posts postsEntity = postsRepository.findById(id)
@@ -43,11 +47,11 @@ public class PostsService {
         return new PostsAndCommentsResponseDto(postsEntity, commentsEntity);
     }
 
-     */
+
 
 
     // 조회 : 게시글과 페이징 처리 댓글
-    /*
+
     @Transactional
     public PostsAndCommentsPageResponseDto findPostsAndCommentsWithPageById(Long id, int page){
         Posts postsEntity = postsRepository.findById(id)
@@ -56,7 +60,7 @@ public class PostsService {
         return new PostsAndCommentsPageResponseDto(postsEntity, commentsPageEntity);
     }
 
-     */
+
 
     @Transactional
     public PostsResponseDto findById(Long id){
@@ -70,18 +74,17 @@ public class PostsService {
     // 게시판 페이징 조회
     @Transactional
     public Page<Posts> list(String category, int page){
-        Pageable paging = PageRequest.of(page,10, Sort.by(Sort.Direction.DESC, "id")
-        return postsRepository.findAllByCategory(category, paging));
+        Pageable paging = PageRequest.of(page,10, Sort.by(Sort.Direction.DESC, "id"));
+        return postsRepository.findAllByCategory(category, paging);
     }
 
     // 댓글 페이징 조회
-    /*
     @Transactional
     public Page<Comments> listComments(int page){
         return commentsRepository.findAll(PageRequest.of(page,10, Sort.by(Sort.Direction.DESC, "cmtId")));
     }
 
-     */
+
 
 
     @Transactional

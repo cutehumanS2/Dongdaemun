@@ -59,8 +59,9 @@ public class PostsApiController {
     /* 게시판 목록 조회 */
     @GetMapping("/list/{category}")
     public ResponseEntity<?> list(Model model, @PathVariable String category, @RequestParam(required = false, defaultValue = "0", value = "page") int page){
-        Page<?> listPage = null; int totalPage;
-        postsService.list(category, page);
+        Page<?> listPage = null;
+        int totalPage;
+        listPage = postsService.list(category, page);
 
         totalPage = listPage.getTotalPages();
 
