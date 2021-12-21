@@ -1,9 +1,6 @@
 package com.dongdaemun.dongdaemun.web.dto.comments;
 
-import com.dongdaemun.dongdaemun.domain.comments.ActivityComments;
-import com.dongdaemun.dongdaemun.domain.comments.AnonyComments;
-import com.dongdaemun.dongdaemun.domain.comments.NoticeComments;
-import com.dongdaemun.dongdaemun.domain.posts.NoticePosts;
+import com.dongdaemun.dongdaemun.domain.comments.Comments;
 import lombok.Getter;
 
 @Getter
@@ -15,32 +12,17 @@ public class CommentsResponseDto {
     private int index;
     private String cmt_content;
     private boolean anony;
+    private String category;
 
-    public CommentsResponseDto(NoticeComments entity){
+    public CommentsResponseDto(Comments entity){
         this.cmtId = entity.getCmtId();
         this.cmtPid = entity.getCmtPid();
         this.uid = entity.getUid();
         this.pid = entity.getPid();//.getId();
         this.cmt_content = entity.getCmt_content();
         this.anony = entity.isCmt_anony();
-    }
+        this.category = entity.getCategory();
 
-    public CommentsResponseDto(AnonyComments entity){
-        this.cmtId = entity.getCmtId();
-        this.cmtPid = entity.getCmtPid();
-        this.uid = entity.getUid();
-        this.pid = entity.getPid();//.getId();
-        this.cmt_content = entity.getCmt_content();
-        this.anony = entity.isCmt_anony();
-    }
-
-    public CommentsResponseDto(ActivityComments entity){
-        this.cmtId = entity.getCmtId();
-        this.cmtPid = entity.getCmtPid();
-        this.uid = entity.getUid();
-        this.pid = entity.getPid();//.getId();
-        this.cmt_content = entity.getCmt_content();
-        this.anony = entity.isCmt_anony();
     }
 
     public CommentsResponseDto(CommentsResponseDto commentsResponseDto){
@@ -50,6 +32,7 @@ public class CommentsResponseDto {
         this.pid = commentsResponseDto.getPid();//.getId();
         this.cmt_content = commentsResponseDto.getCmt_content();
         this.anony = commentsResponseDto.isAnony();
+        this.category = commentsResponseDto.getCategory();
     }
 
 }
