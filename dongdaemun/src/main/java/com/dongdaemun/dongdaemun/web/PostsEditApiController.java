@@ -1,13 +1,11 @@
 package com.dongdaemun.dongdaemun.web;
 
 import com.dongdaemun.dongdaemun.config.auth.LoginUser;
-import com.dongdaemun.dongdaemun.service.posts.ActivityPostsService;
-import com.dongdaemun.dongdaemun.service.posts.AnonyPostsService;
+import com.dongdaemun.dongdaemun.service.posts.PostsService;
 import com.dongdaemun.dongdaemun.web.dto.posts.PostsSaveRequestDto;
 import com.dongdaemun.dongdaemun.web.dto.posts.PhotosSaveRequestDto;
 
 import com.dongdaemun.dongdaemun.config.auth.dto.SessionUser;
-import com.dongdaemun.dongdaemun.service.posts.NoticePostsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -26,9 +24,7 @@ import java.util.UUID;
 @Controller
 public class PostsEditApiController {
 
-    private final NoticePostsService noticePostsService;
-    private final AnonyPostsService anonyPostsService;
-    private final ActivityPostsService activityPostsService;
+    private final PostsService postsService;
 
     @GetMapping("/write/{category}")
     public ModelAndView insertEditor(ModelMap model, @LoginUser SessionUser user, @PathVariable String category) throws Exception {
@@ -44,16 +40,8 @@ public class PostsEditApiController {
     @ResponseBody
     @PostMapping("/save/{category}")
     public ResponseEntity<?> savePost(@RequestBody PostsSaveRequestDto requestDto, @PathVariable String category) throws Exception{
-        if(category.compareTo("notice")==0){
-            return ResponseEntity.ok()
-                    .body(noticePostsService.save(requestDto));}
-        else if(category.compareTo("anony")==0){
-            return ResponseEntity.ok()
-                    .body(anonyPostsService.save(requestDto));}
-        else if(category.compareTo("activity")==0){
-            return ResponseEntity.ok()
-                    .body(activityPostsService.save(requestDto));}
-        else return null;
+        return ResponseEntity.ok()
+                .body(postsService.save(requestDto));
     }
 
     //단일 파일 업로드

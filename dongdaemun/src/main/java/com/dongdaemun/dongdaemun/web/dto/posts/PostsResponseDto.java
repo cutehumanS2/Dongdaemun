@@ -1,9 +1,6 @@
 package com.dongdaemun.dongdaemun.web.dto.posts;
 
-import com.dongdaemun.dongdaemun.domain.posts.ActivityPosts;
-import com.dongdaemun.dongdaemun.domain.posts.AnonyPosts;
-import com.dongdaemun.dongdaemun.domain.posts.NoticePosts;
-import com.dongdaemun.dongdaemun.domain.user.User;
+import com.dongdaemun.dongdaemun.domain.posts.Posts;
 import lombok.Getter;
 
 @Getter
@@ -12,28 +9,14 @@ public class PostsResponseDto {
     private String uid;
     private String title;
     private String content;
+    private String category;
     private boolean anony;
 
-    public PostsResponseDto(NoticePosts entity){
+    public PostsResponseDto(Posts entity){
         this.id = entity.getId();
         this.uid = entity.getUid();
         this.title = entity.getTitle();
-        this.content = entity.getContent();
-        this.anony = entity.isAnony();
-    }
-
-    public PostsResponseDto(AnonyPosts entity){
-        this.id = entity.getId();
-        this.uid = entity.getUid();
-        this.title = entity.getTitle();
-        this.content = entity.getContent();
-        this.anony = entity.isAnony();
-    }
-
-    public PostsResponseDto(ActivityPosts entity){
-        this.id = entity.getId();
-        this.uid = entity.getUid();
-        this.title = entity.getTitle();
+        this.category = entity.getCategory();
         this.content = entity.getContent();
         this.anony = entity.isAnony();
     }
