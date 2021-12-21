@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 public class IndexController {
 
     private final HttpSession httpSession;
-    private final NoticePostsService postsService;
+
     /*
 
     @GetMapping("/")
@@ -36,14 +36,6 @@ public class IndexController {
         return "index";
     }
 
-
-    /*
-    @GetMapping("/editor")
-    public String editor(Model model) {
-        //model.addAttribute("posts", postsService.findAllDesc());
-
-        return "/smarteditor/newPost";
-    }*/
 
 
 }
