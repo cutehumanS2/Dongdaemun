@@ -15,7 +15,7 @@ public class AnonyComments extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cmtId;
 
-    private Long cmtPid; //
+    private Long cmtPid;
 
     //@ManyToOne
     //@JoinColumn(name ="noticeFK", insertable=false, updatable=false)

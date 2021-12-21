@@ -1,5 +1,7 @@
 package com.dongdaemun.dongdaemun.web.dto.comments;
 
+import com.dongdaemun.dongdaemun.domain.comments.ActivityComments;
+import com.dongdaemun.dongdaemun.domain.comments.AnonyComments;
 import com.dongdaemun.dongdaemun.domain.comments.NoticeComments;
 import com.dongdaemun.dongdaemun.domain.posts.NoticePosts;
 import lombok.Getter;
@@ -15,6 +17,24 @@ public class CommentsResponseDto {
     private boolean anony;
 
     public CommentsResponseDto(NoticeComments entity){
+        this.cmtId = entity.getCmtId();
+        this.cmtPid = entity.getCmtPid();
+        this.uid = entity.getUid();
+        this.pid = entity.getPid();//.getId();
+        this.cmt_content = entity.getCmt_content();
+        this.anony = entity.isCmt_anony();
+    }
+
+    public CommentsResponseDto(AnonyComments entity){
+        this.cmtId = entity.getCmtId();
+        this.cmtPid = entity.getCmtPid();
+        this.uid = entity.getUid();
+        this.pid = entity.getPid();//.getId();
+        this.cmt_content = entity.getCmt_content();
+        this.anony = entity.isCmt_anony();
+    }
+
+    public CommentsResponseDto(ActivityComments entity){
         this.cmtId = entity.getCmtId();
         this.cmtPid = entity.getCmtPid();
         this.uid = entity.getUid();

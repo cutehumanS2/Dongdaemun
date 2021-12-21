@@ -1,5 +1,7 @@
 package com.dongdaemun.dongdaemun.web.dto.comments;
 
+import com.dongdaemun.dongdaemun.domain.comments.ActivityComments;
+import com.dongdaemun.dongdaemun.domain.comments.AnonyComments;
 import com.dongdaemun.dongdaemun.domain.comments.NoticeComments;
 import com.dongdaemun.dongdaemun.domain.posts.NoticePosts;
 import com.dongdaemun.dongdaemun.domain.user.User;
@@ -41,6 +43,28 @@ public class CommentsSaveRequestDto {
 
     public NoticeComments toEntityNotice(){
         return NoticeComments.builder()
+                .cmt_content(cmt_content)
+                .cmt_pid(cmtPid)
+                .uid(uid)
+                .pid(pid)  /* Long -> NoticePosts */
+                .cmt_index(index)
+                .anony(anony)
+                .build();
+    }
+
+    public ActivityComments toEntityActivity(){
+        return ActivityComments.builder()
+                .cmt_content(cmt_content)
+                .cmt_pid(cmtPid)
+                .uid(uid)
+                .pid(pid)  /* Long -> NoticePosts */
+                .cmt_index(index)
+                .anony(anony)
+                .build();
+    }
+
+    public AnonyComments toEntityAnony(){
+        return AnonyComments.builder()
                 .cmt_content(cmt_content)
                 .cmt_pid(cmtPid)
                 .uid(uid)

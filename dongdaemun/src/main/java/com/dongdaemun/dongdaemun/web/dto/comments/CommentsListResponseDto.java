@@ -1,5 +1,7 @@
 package com.dongdaemun.dongdaemun.web.dto.comments;
 
+import com.dongdaemun.dongdaemun.domain.comments.ActivityComments;
+import com.dongdaemun.dongdaemun.domain.comments.AnonyComments;
 import com.dongdaemun.dongdaemun.domain.comments.NoticeComments;
 import com.dongdaemun.dongdaemun.domain.posts.NoticePosts;
 
@@ -16,6 +18,26 @@ public class CommentsListResponseDto {
     private LocalDateTime modifiedDate;
 
     public CommentsListResponseDto(NoticeComments entity){
+        this.cmtId = entity.getCmtId();
+        this.cmtPid = entity.getCmtPid();
+        this.uid = entity.getUid();
+        this.pid = entity.getPid();//.getId();
+        this.cmt_content = entity.getCmt_content();
+        this.anony = entity.isCmt_anony();
+        this.modifiedDate = entity.getModifieDate();
+    }
+
+    public CommentsListResponseDto(AnonyComments entity){
+        this.cmtId = entity.getCmtId();
+        this.cmtPid = entity.getCmtPid();
+        this.uid = entity.getUid();
+        this.pid = entity.getPid();//.getId();
+        this.cmt_content = entity.getCmt_content();
+        this.anony = entity.isCmt_anony();
+        this.modifiedDate = entity.getModifieDate();
+    }
+
+    public CommentsListResponseDto(ActivityComments entity){
         this.cmtId = entity.getCmtId();
         this.cmtPid = entity.getCmtPid();
         this.uid = entity.getUid();

@@ -5,6 +5,7 @@ import com.dongdaemun.dongdaemun.domain.comments.ActivityCommentsRepository;
 import com.dongdaemun.dongdaemun.domain.comments.NoticeComments;
 import com.dongdaemun.dongdaemun.domain.posts.ActivityPosts;
 import com.dongdaemun.dongdaemun.domain.posts.ActivityPostsRepository;
+import com.dongdaemun.dongdaemun.domain.posts.AnonyPosts;
 import com.dongdaemun.dongdaemun.domain.posts.NoticePosts;
 import com.dongdaemun.dongdaemun.web.dto.posts.*;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ import java.util.List;
 @Service
 public class ActivityPostsService {
     private final ActivityPostsRepository activityPostsRepository;
-    //private final ActivityCommentsRepository activityCommentsRepository;
+    private final ActivityCommentsRepository activityCommentsRepository;
 
     @Transactional
     public ActivityPosts save(PostsSaveRequestDto requestDto){
@@ -36,7 +37,6 @@ public class ActivityPostsService {
     }
 
     // 조회 : 게시글과 전체 댓글
-    /*
     @Transactional
     public PostsAndCommentsResponseDto findPostAndCommentsById(Long id){
         ActivityPosts postsEntity = activityPostsRepository.findById(id)
@@ -46,9 +46,7 @@ public class ActivityPostsService {
 
         return new PostsAndCommentsResponseDto(postsEntity, commentsEntity);
     }
-     */
 
-/*
     // 조회 : 게시글과 페이징 처리 댓글
     @Transactional
     public PostsAndCommentsPageResponseDto findPostsAndCommentsWithPageById(Long id, int page){
@@ -58,7 +56,13 @@ public class ActivityPostsService {
 
         return new PostsAndCommentsPageResponseDto(postsEntity, commentsPageEntity);
     }
- */
+
+    @Transactional
+    public PostsResponseDto findById(Long id){
+        ActivityPosts postsEntity = activityPostsRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id="+id));
+        return new PostsResponseDto(postsEntity);
+    }
 
     // 게시판 페이징 조회
     @Transactional
@@ -67,12 +71,10 @@ public class ActivityPostsService {
     }
 
     // 댓글 페이징 조회
-    /*
     @Transactional
     public Page<ActivityComments> listComments(int page){
         return activityCommentsRepository.findAll(PageRequest.of(page,10, Sort.by(Sort.Direction.DESC, "cmtId")));
     }
-     */
 
     @Transactional
     public void delete (Long id) {

@@ -39,8 +39,6 @@ public class AnonyCommentsService {
         return new CommentsResponseDto(comments);
     }
 
-
-
     // 전체 조회
     @Transactional
     public List<CommentsListResponseDto> findAllDesc(Long pid){
