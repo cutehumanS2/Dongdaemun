@@ -7,6 +7,7 @@ import com.dongdaemun.dongdaemun.web.dto.posts.PhotosSaveRequestDto;
 
 import com.dongdaemun.dongdaemun.config.auth.dto.SessionUser;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -26,15 +27,17 @@ public class PostsEditApiController {
 
     private final PostsService postsService;
 
+    @ResponseBody
     @GetMapping("/write")
-    public ModelAndView insertEditor(ModelMap model, @LoginUser SessionUser user, @RequestParam("category") String category) throws Exception {
+    public ResponseEntity<?> insertEditor(ModelMap model, @LoginUser SessionUser user, @RequestParam("category") String category) throws Exception {
         if (user != null) {
             model.addAttribute("userEmail", user.getEmail());
             model.addAttribute("category", category);
         }
-        ModelAndView mav = new ModelAndView("smarteditor/newPost");
+        //ModelAndView mav = new ModelAndView("smarteditor/newPost");
+        //return mav;
 
-        return mav;
+        return new ResponseEntity<>(model, HttpStatus.OK);
     }
 
     @ResponseBody

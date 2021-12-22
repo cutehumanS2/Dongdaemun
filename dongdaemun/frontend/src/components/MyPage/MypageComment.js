@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import Pagination from './Pagination';
-import { paginate } from './paginate';
-import "./Table.css"
+import Pagination from '../Post/Pagination';
+import { paginate } from '../Post/paginate';
+import "./Post.Table.css"
 
-const MypagePost = () => {
+const MypageComment = () => {
     const posts = [
       {
         "createDate": "2021-12-20T20:26:31.495907", //LocalDateTime
@@ -39,7 +39,7 @@ const renderPosts = posts && posts.map(post => {
     <>
     <div className="table">
         <div className="titlebar">
-      <p className='title'>내가 쓴 글</p>
+      <p className='title'>내가 쓴 댓글</p>
       </div>
       <div className="bar">
           <div>제목</div>
@@ -51,4 +51,4 @@ const renderPosts = posts && posts.map(post => {
   );
 };
 
-export default MypagePost;
+export default MypageComment;
