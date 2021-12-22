@@ -16,7 +16,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .headers().frameOptions().disable()//
                 .and().authorizeRequests()  //
-                .antMatchers("/", "h2-console/**").permitAll()//랜딩페이지만 모두가 열람 가능
+                .antMatchers("/", "h2-console/**", "/**").permitAll()//랜딩페이지만 모두가 열람 가능
                 //.antMatchers("/", "/css/**", "/images/**",
                  //       "/js/**","h2-console/**").permitAll()
                 //.antMatchers("/api/v1/**").hasRole(Role.USER.name())

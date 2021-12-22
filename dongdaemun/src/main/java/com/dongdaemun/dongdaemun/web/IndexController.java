@@ -15,20 +15,27 @@ public class IndexController {
 
     private final HttpSession httpSession;
 
+    /*
+
+    @GetMapping("/")
+    public ResponseEntity<?> index(Model model, @LoginUser SessionUser user){
+
+        if(user != null){
+            model.addAttribute("userName", user.getName());
+        }
+        return new ResponseEntity<>(model, HttpStatus.OK);
+    }
+     */
+
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user) {
         //model.addAttribute("posts", postsService.findAllDesc());
-
         if (user != null) {
             model.addAttribute("userName", user.getName());
         }
         return "index";
     }
 
-    @GetMapping("/editor")
-    public String editor(Model model) {
-        //model.addAttribute("posts", postsService.findAllDesc());
 
-        return "/smarteditor/newPost";
-    }
+
 }
