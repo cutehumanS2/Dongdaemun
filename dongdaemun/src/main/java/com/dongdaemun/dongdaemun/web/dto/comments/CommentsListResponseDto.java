@@ -19,7 +19,7 @@ public class CommentsListResponseDto {
         this.cmtId = entity.getCmtId();
         this.cmtPid = entity.getCmtPid();
         this.uid = entity.getUid();
-        this.pid = entity.getPid();//.getId();
+        this.pid = entity.getPid().getId();
         this.cmt_content = entity.getCmt_content();
         this.anony = entity.isCmt_anony();
         this.category = entity.getCategory();

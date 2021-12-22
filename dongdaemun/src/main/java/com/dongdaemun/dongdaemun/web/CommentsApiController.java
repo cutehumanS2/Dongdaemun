@@ -16,8 +16,8 @@ public class CommentsApiController {
     private final CommentsService commentsService;
 
     /* 댓글 등록 */
-    @PostMapping("/saveCmt/{category}/{pid}")
-    public ResponseEntity<?> saveCmt(@RequestBody CommentsSaveRequestDto requestDto, @PathVariable String category, @PathVariable Long pid) throws Exception{
+    @PostMapping("/saveCmt")
+    public ResponseEntity<?> saveCmt(@RequestBody CommentsSaveRequestDto requestDto, @RequestParam("category")  String category, @RequestParam("pid") Long pid) throws Exception{
 
         return ResponseEntity.ok()
                 .body(commentsService.save(requestDto));
