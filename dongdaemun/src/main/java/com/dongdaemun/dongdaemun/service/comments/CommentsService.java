@@ -2,6 +2,8 @@ package com.dongdaemun.dongdaemun.service.comments;
 
 import com.dongdaemun.dongdaemun.domain.comments.Comments;
 import com.dongdaemun.dongdaemun.domain.comments.CommentsRepository;
+import com.dongdaemun.dongdaemun.domain.posts.Posts;
+import com.dongdaemun.dongdaemun.domain.posts.PostsRepository;
 import com.dongdaemun.dongdaemun.web.dto.comments.CommentsListResponseDto;
 import com.dongdaemun.dongdaemun.web.dto.comments.CommentsResponseDto;
 import com.dongdaemun.dongdaemun.web.dto.comments.CommentsSaveRequestDto;
@@ -10,17 +12,25 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.xml.stream.events.Comment;
 import java.util.List;
 import java.util.stream.Collectors;
+
 
 @RequiredArgsConstructor
 @Service
 public class CommentsService {
     private final CommentsRepository commentsRepository;
+    private final PostsRepository postsRepository;
 
     @Transactional
     public Comments save(CommentsSaveRequestDto requestDto){
-        return commentsRepository.save(requestDto.toEntity());
+        Posts post = postsRepository.findById(requestDto.getPid())
+                .orElseThrow(IllegalArgumentException::new);
+        System.out.println(post.getId());
+        Comments comment = requestDto.toEntity();
+        comment.setPid(post);
+        return commentsRepository.save(comment);
     }
 
     @Transactional

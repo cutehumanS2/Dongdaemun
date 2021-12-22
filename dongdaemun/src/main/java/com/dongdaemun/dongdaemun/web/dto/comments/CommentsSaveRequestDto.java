@@ -12,9 +12,9 @@ public class CommentsSaveRequestDto {
     private Long cmtPid;
     private String uid;
     private Long pid;
-    private int index;
+    private int cmt_index;
     private String cmt_content;
-    private boolean anony;
+    private boolean cmt_anony;
     private String category;
 
     @Builder
@@ -23,8 +23,8 @@ public class CommentsSaveRequestDto {
         this.cmt_content = cmt_content;
         this.uid = uid;
         this.pid = pid;
-        this.index = index;
-        this.anony = anony;
+        this.cmt_index = index;
+        this.cmt_anony = anony;
         this.category = category;
     }
 
@@ -34,8 +34,8 @@ public class CommentsSaveRequestDto {
         this.cmtPid = 0L;
         this.uid = uid;
         this.pid = pid;
-        this.index = index;
-        this.anony = anony;
+        this.cmt_index = index;
+        this.cmt_anony = anony;
         this.category = category;
     }
 
@@ -44,13 +44,11 @@ public class CommentsSaveRequestDto {
                 .cmt_content(cmt_content)
                 .cmt_pid(cmtPid)
                 .uid(uid)
-                .pid(pid)  /* Long -> NoticePosts */
-                .cmt_index(index)
-                .anony(anony)
+                //.pid(post)  /* Long -> Posts */
+                .cmt_index(cmt_index)
+                .cmt_anony(cmt_anony)
                 .category(category)
                 .build();
     }
-
-
 
 }

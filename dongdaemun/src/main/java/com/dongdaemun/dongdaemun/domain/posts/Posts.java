@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ser.Serializers;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -15,7 +16,7 @@ public class Posts extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //@Column(name="POST_ID")
+    @JsonIgnore
     private Long id;
 
     //@ManyToOne

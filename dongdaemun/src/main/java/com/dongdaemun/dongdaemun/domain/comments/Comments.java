@@ -1,6 +1,7 @@
 package com.dongdaemun.dongdaemun.domain.comments;
 
 import com.dongdaemun.dongdaemun.domain.BaseTimeEntity;
+import com.dongdaemun.dongdaemun.domain.posts.Posts;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,11 +18,11 @@ public class Comments extends BaseTimeEntity {
 
     private Long cmtPid;
 
-    //@ManyToOne
-    //@JoinColumn(name ="noticeFK", insertable=false, updatable=false)
-    //private NoticePosts pid;
+    @ManyToOne
+    @JoinColumn(name ="postFK")
+    //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Posts pid;
 
-    private Long pid;
     private String uid;
 
     @Column(nullable = false)
@@ -37,7 +38,7 @@ public class Comments extends BaseTimeEntity {
     String category;
 
     @Builder
-    public Comments(Long cmt_pid, String uid, Long pid, int cmt_index, String cmt_content, boolean anony, String category){
+    public Comments(Long cmt_pid, String uid, Posts pid, int cmt_index, String cmt_content, boolean cmt_anony, String category){
         this.cmtPid = cmt_pid;
         this.uid = uid;
         this.pid = pid;
@@ -50,5 +51,9 @@ public class Comments extends BaseTimeEntity {
     public Comments update(String cmt_content){
         this.cmt_content = cmt_content;
         return this;
+    }
+
+    public void setPid(Posts pid) {
+        this.pid = pid;
     }
 }
