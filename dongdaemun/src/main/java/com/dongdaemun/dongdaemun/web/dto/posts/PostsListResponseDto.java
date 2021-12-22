@@ -1,4 +1,4 @@
-package com.dongdaemun.dongdaemun.web.dto;
+package com.dongdaemun.dongdaemun.web.dto.posts;
 
 import com.dongdaemun.dongdaemun.domain.posts.Posts;
 import lombok.Getter;
@@ -12,6 +12,7 @@ public class PostsListResponseDto {
     private String title;
     private String content;
     private boolean anony;
+    private String category;
     private LocalDateTime modifiedDate;
 
     public PostsListResponseDto(Posts entity){
@@ -20,6 +21,8 @@ public class PostsListResponseDto {
         this.title = entity.getTitle();
         this.content = entity.getContent();
         this.anony = entity.isAnony();
+        this.category = entity.getCategory();
         this.modifiedDate = entity.getModifieDate();
     }
+
 }

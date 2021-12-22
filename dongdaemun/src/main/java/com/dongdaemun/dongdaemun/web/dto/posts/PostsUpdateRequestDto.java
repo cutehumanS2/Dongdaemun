@@ -1,4 +1,4 @@
-package com.dongdaemun.dongdaemun.web.dto;
+package com.dongdaemun.dongdaemun.web.dto.posts;
 
 
 import lombok.Builder;

@@ -1,20 +1,18 @@
 package com.dongdaemun.dongdaemun.web;
 
 import com.dongdaemun.dongdaemun.config.auth.LoginUser;
-import com.dongdaemun.dongdaemun.web.dto.PostsSaveRequestDto;
-import com.dongdaemun.dongdaemun.web.dto.PhotosSaveRequestDto;
+import com.dongdaemun.dongdaemun.service.posts.PostsService;
+import com.dongdaemun.dongdaemun.web.dto.posts.PostsSaveRequestDto;
+import com.dongdaemun.dongdaemun.web.dto.posts.PhotosSaveRequestDto;
 
 import com.dongdaemun.dongdaemun.config.auth.dto.SessionUser;
-import com.dongdaemun.dongdaemun.service.PostsService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
-import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,28 +20,14 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.UUID;
 
-
+@RequiredArgsConstructor
 @Controller
-public class EditorController {
+public class PostsEditApiController {
 
-    @Autowired
-    PostsService postService;
+    private final PostsService postsService;
 
-
-    /*
-    @RequestMapping("/smarteditor")
-    public ModelAndView insertEditor(ModelMap model, @LoginUser SessionUser user, @PathVariable String category) throws Exception {
-        if (user != null) {
-            model.addAttribute("userEmail", user.getEmail());
-        }
-        ModelAndView mav = new ModelAndView("smarteditor/newPost");
-
-        return mav;
-    }
-    */
-
-    @RequestMapping("/postwrite/{category}")
-    public ModelAndView insertEditor(ModelMap model, @LoginUser SessionUser user, @PathVariable String category) throws Exception {
+    @GetMapping("/write")
+    public ModelAndView insertEditor(ModelMap model, @LoginUser SessionUser user, @RequestParam("category") String category) throws Exception {
         if (user != null) {
             model.addAttribute("userEmail", user.getEmail());
             model.addAttribute("category", category);
@@ -54,17 +38,13 @@ public class EditorController {
     }
 
     @ResponseBody
-    @RequestMapping(value="/postsave/{category}", method = RequestMethod.POST)
-    public View savePost(@RequestBody PostsSaveRequestDto requestDto, @PathVariable String category) throws Exception {
-        ModelMap model = new ModelMap();
-        model.addAttribute("result", HttpStatus.OK);
-        if(category.compareTo("notice")==0) postService.save(requestDto);
-
-        return new MappingJackson2JsonView();
+    @PostMapping("/save")
+    public ResponseEntity<?> savePost(@RequestBody PostsSaveRequestDto requestDto, @RequestParam("category") String category) throws Exception{
+        return ResponseEntity.ok()
+                .body(postsService.save(requestDto));
     }
 
-
-    //단일파일업로드
+    //단일 파일 업로드
     @RequestMapping("/singlePhotoUpload")
     public String singlePhotoUploader(HttpServletRequest request, PhotosSaveRequestDto requestDto) throws UnsupportedEncodingException {
         String callback = requestDto.getCallback();
@@ -100,7 +80,7 @@ public class EditorController {
         return "redirect:" + callback + "?callback_func="+callback_func+file_result;
     }
 
-    //다중파일업로드
+    //다중 파일 업로드
     @RequestMapping("/multiplePhotoUpload")
     public void multiplePhotoUploader(HttpServletRequest request, HttpServletResponse response){
         try {
