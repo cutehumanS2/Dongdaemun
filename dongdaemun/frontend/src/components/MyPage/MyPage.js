@@ -1,9 +1,7 @@
 import React from 'react'
-import './Mypage.css';
+import './MyPage.css';
 
-// import { Link } from "react-router-dom"
-
-function Mypage() {
+function MyPage() {
   const clubName = "GDSC sookmyung"
   const user = "김서현"
   const posts = [
@@ -57,4 +55,4 @@ function Mypage() {
   )
 }
 
-export default Mypage;
+export default MyPage;
