@@ -50,7 +50,9 @@ public class CommentsService {
     // 전체 조회
     @Transactional
     public List<CommentsListResponseDto> findAllDesc(Long pid){
-        return commentsRepository.findAllByPid(pid).stream()
+        Posts postsEntity = postsRepository.findById(pid)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. pid="+pid));
+        return commentsRepository.findAllByPid(postsEntity).stream()
                 .map(CommentsListResponseDto::new)
                 .collect(Collectors.toList());
     }
