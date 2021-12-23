@@ -1,0 +1,43 @@
+.App {
+  text-align: center;
+  position: relative;
+}
+
+.logo-img {
+  height: 25vmin;
+  pointer-events: none;
+}
+
+.logo-name {
+  color: #084a83;
+  font-family: "Josefin Slab", serif;
+  font-weight: bold;
+}
+.logo-explain {
+  font-size: medium;
+}
+.btn-google {
+  margin-top: 5%;
+}
+
+.App-header {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,17 +1,15 @@
+//App.js
 import React from 'react';
-import "./css/App.css";
-import LandingPage from "./landingPage";
-import NavBar from "./navBar";
-import ReadPost from "./readPost.js";
+import NavBar from './components/NavBar/NavBar';
+import ReadPost from './components/Post/ReadPost';
 
-function App() {
-  return (
-    <div className="App">
-      <NavBar/>
-      <ReadPost></ReadPost>
+function App () {
 
-    </div>
-  );
-}
+return (
+  <div className="App">
+    <NavBar/>
+    <ReadPost/>
 
+  </div>
+)}
 export default App;
