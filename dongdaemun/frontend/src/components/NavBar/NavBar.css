@@ -1,0 +1,33 @@
+.navBar {
+  background-color: #c6e5f3;
+}
+.nav-logo {
+  position: relative;
+  width: 130px;
+  left: 0px;
+  background-size: contain;
+}
+
+.login-btn {
+  background-color: "#ffffe7";
+  outline: none;
+  color: black;
+  position: absolute;
+  top: auto;
+  right: 120px;
+  border-radius: 40px !important;
+}
+
+.mypage-btn {
+  background-color: "#ffffe7";
+  outline: none;
+  color: black;
+  position: absolute;
+  top: auto;
+  right: 40px;
+  border-radius: 40px !important;
+}
+
+.nav-link {
+  color: #084a83 !important;
+}
