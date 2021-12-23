@@ -13,7 +13,9 @@ public class CommentsListResponseDto {
     private String cmt_content;
     private boolean anony;
     private String category;
-    private LocalDateTime modifiedDate;
+    //private LocalDateTime modifiedDate;
+    private String modifiedDate;
+    private String modifiedDate2;
 
     public CommentsListResponseDto(Comments entity){
         this.cmtId = entity.getCmtId();
@@ -24,6 +26,7 @@ public class CommentsListResponseDto {
         this.anony = entity.isCmt_anony();
         this.category = entity.getCategory();
         this.modifiedDate = entity.getModifieDate();
+        this.modifiedDate2 = entity.getModifieDate2();
     }
 
 
