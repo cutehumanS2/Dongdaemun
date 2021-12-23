@@ -39,7 +39,7 @@ public class MyPageController {
     // 내가 작성한 글 더보기
     @GetMapping("/mypage/myposts")
     public ResponseEntity<?> postsview(@LoginUser SessionUser user
-            , @RequestParam(required = false, defaultValue = "0", value = "commentPage") int page){
+            , @RequestParam(required = false, defaultValue = "0", value = "page") int page){
         String email="";
         if(user!=null) {
             email = user.getEmail();
