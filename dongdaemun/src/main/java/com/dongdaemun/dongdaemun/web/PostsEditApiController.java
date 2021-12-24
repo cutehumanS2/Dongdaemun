@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.UUID;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RequiredArgsConstructor
 @Controller
 public class PostsEditApiController {
