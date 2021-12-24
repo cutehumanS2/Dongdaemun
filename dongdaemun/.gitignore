@@ -6,6 +6,9 @@ build/
 !**/src/test/**/build/
 application-oauth.properties
 application.properties
+frontend/
+**/src/main/resources/**/ckeditor/
+**/src/main/resources/**/smarteditor/
 
 ### STS ###
 .apt_generated
