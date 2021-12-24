@@ -19,19 +19,15 @@ import java.time.format.DateTimeFormatter;
 public class BaseTimeEntity {
 
     @CreatedDate
-    //private LocalDateTime createDate;
     private String createDate;
 
     @CreatedDate
-    //private LocalDateTime createDate;
     private String createDate2;
 
     @LastModifiedDate
-    //private LocalDateTime modifieDate;
     private String modifieDate;
 
     @LastModifiedDate
-    //private LocalDateTime modifieDate;
     private String modifieDate2;
 
     //엔티티 insert 이전 실행

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+</head>
+<body>
+    <tr>
+        <th>내용</th>
+        <td><textarea id="content" name="content"></textarea>
+            <script type="text/javascript">	// 글쓰기 editor 및 사진 업로드 기능
+                CKEDITOR.replace('content',
+                {filebrowserUploadUrl:'/imageUpload.do'
+                });
+            </script>
+        </td>
+    </tr>
+    <input type="button" id="submit" value="제출"/>
+</body>
+</html>
+
+<script>
+    $(function() {
+    $("#submit").click(function() {
+
+        let ckData = CKEDITOR.instances.content.getData();
+        console.log(ckData);
+        let category = "notice";
+        let title = "hi";
+        let uid = "cherrycoke@sookmyung.ac.kr";
+        let anony = false;
+
+        let posts={
+            uid: uid,
+            title: title,
+            content: ckData,
+            category: category,
+            anony: anony
+        }
+
+        console.log(category);
+
+        $.ajax({
+            type: "POST",
+            url: "/save?category=" + category,
+            dataType:'json',
+            data: JSON.stringify(posts),
+            contentType: 'application/json; charset=utf-8',
+            cache: false,
+            success: function(ckData){
+                console.log('성공');
+                alert('저장');
+            },error: function(jqXHR, textStatus, errorThrown){
+                console.log(jqXHR);
+                alert('오류');
+             }
+        });
+
+        return false;
+    });
+    });
+</script>

@@ -3,8 +3,6 @@ package com.dongdaemun.dongdaemun.web;
 import com.dongdaemun.dongdaemun.config.auth.LoginUser;
 import com.dongdaemun.dongdaemun.service.posts.PostsService;
 import com.dongdaemun.dongdaemun.web.dto.posts.PostsSaveRequestDto;
-import com.dongdaemun.dongdaemun.web.dto.posts.PhotosSaveRequestDto;
-
 import com.dongdaemun.dongdaemun.config.auth.dto.SessionUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,12 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.text.SimpleDateFormat;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -39,6 +38,14 @@ public class PostsEditApiController {
 
         return new ResponseEntity<>(model, HttpStatus.OK);
     }
+    /*
+    @GetMapping("/ckWrite")
+    public ModelAndView insertEditor( @LoginUser SessionUser user, @RequestParam("category") String category) throws Exception {
+
+        ModelAndView mav = new ModelAndView("/ckPost");
+        return mav;
+
+    }*/
 
     @ResponseBody
     @PostMapping("/save")
@@ -47,95 +54,108 @@ public class PostsEditApiController {
                 .body(postsService.save(requestDto));
     }
 
-    //단일 파일 업로드
-    @RequestMapping("/singlePhotoUpload")
-    public String singlePhotoUploader(HttpServletRequest request, PhotosSaveRequestDto requestDto) throws UnsupportedEncodingException {
-        String callback = requestDto.getCallback();
-        String callback_func = requestDto.getCallback_func();
-        String file_result = "";
-        MultipartFile multipartFile = requestDto.getFiledata();
-        try {
-            if(requestDto.getFiledata() != null && requestDto.getFiledata().getOriginalFilename() != null && !requestDto.getFiledata().getOriginalFilename().equals("")){
-                //파일이 존재하면
-                String original_name = requestDto.getFiledata().getOriginalFilename();
-                String ext = original_name.substring(original_name.lastIndexOf(".")+1);
-                //파일 기본경로
-                String defaultPath = request.getSession().getServletContext().getRealPath("/");
-                //파일 기본경로 _ 상세경로
-                String path = defaultPath + "resource" + File.separator + "photo_upload" + File.separator;
-                File file = new File(path);
-                System.out.println("path:"+path);
-                //디렉토리 존재하지 않을경우 디렉토리 생성
-                if(!file.exists()) {
-                    file.mkdirs();
+    // 이미지 업로드
+    @RequestMapping(value="/imageUpload.do", method = RequestMethod.POST)
+    public void imageUpload(HttpServletRequest request,
+                            HttpServletResponse response, MultipartHttpServletRequest multiFile
+            , @RequestParam MultipartFile upload) throws Exception{
+        // 랜덤 문자 생성
+        UUID uid = UUID.randomUUID();
+
+        OutputStream out = null;
+        PrintWriter printWriter = null;
+
+        //인코딩
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=utf-8");
+        try{
+            //파일 이름 가져오기
+            String fileName = upload.getOriginalFilename();
+            byte[] bytes = upload.getBytes();
+
+            //이미지 경로 생성
+            String path = "C:\\DongdaemunImg\\";
+            String ckUploadPath = path + uid + "_" + fileName;
+            File folder = new File(path);
+            System.out.println("path:"+path);	// 이미지 저장경로 console에 확인
+            //해당 디렉토리 확인
+            if(!folder.exists()){
+                try{
+                    folder.mkdirs(); // 폴더 생성
+                }catch(Exception e){
+                    e.getStackTrace();
                 }
-                //서버에 업로드 할 파일명(한글문제로 인해 원본파일은 올리지 않는것이 좋음)
-                String realname = UUID.randomUUID().toString() + "." + ext;
-                ///////////////// 서버에 파일쓰기 /////////////////
-                requestDto.getFiledata().transferTo(new File(path+realname));
-                file_result += "&bNewLine=true&sFileName="+original_name+"&sFileURL=/resource/photo_upload/"+realname;
-            } else {
-                file_result += "&errstr=error";
             }
-        } catch (Exception e) {
+
+            out = new FileOutputStream(new File(ckUploadPath));
+            out.write(bytes);
+            out.flush(); // outputStram에 저장된 데이터를 전송하고 초기화
+
+            String callback = request.getParameter("CKEditorFuncNum");
+            printWriter = response.getWriter();
+            String fileUrl = "/ckImgSubmit.do?uid=" + uid + "&fileName=" + fileName; // 작성화면
+
+            // 업로드시 메시지 출력
+            printWriter.println("{\"filename\" : \""+fileName+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}");
+            printWriter.flush();
+
+        }catch(IOException e){
             e.printStackTrace();
+        } finally {
+            try {
+                if(out != null) { out.close(); }
+                if(printWriter != null) { printWriter.close(); }
+            } catch(IOException e) { e.printStackTrace(); }
         }
-        return "redirect:" + callback + "?callback_func="+callback_func+file_result;
+        return;
     }
 
-    //다중 파일 업로드
-    @RequestMapping("/multiplePhotoUpload")
-    public void multiplePhotoUploader(HttpServletRequest request, HttpServletResponse response){
-        try {
-            //파일정보
-            String sFileInfo = "";
-            //파일명을 받는다 - 일반 원본파일명
-            String filename = request.getHeader("file-name");
-            //파일 확장자
-            String filename_ext = filename.substring(filename.lastIndexOf(".")+1);
-            //확장자를소문자로 변경
-            filename_ext = filename_ext.toLowerCase();
-            //파일 기본경로
-            String dftFilePath = request.getSession().getServletContext().getRealPath("/");
-            //파일 기본경로 _ 상세경로
-            String filePath = dftFilePath + "resource" + File.separator + "photo_upload" + File.separator;
-            File file = new File(filePath);
-            if(!file.exists()) {
-                file.mkdirs();
+    // 서버로 전송된 이미지 뿌려주기
+    @RequestMapping(value="/ckImgSubmit.do")
+    public void ckSubmit(@RequestParam(value="uid") String uid
+            , @RequestParam(value="fileName") String fileName
+            , HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException{
+
+        //서버에 저장된 이미지 경로
+        String path = "C:\\DongdaemunImg\\";	// 저장된 이미지 경로
+        System.out.println("path:"+path);
+        String sDirPath = path + uid + "_" + fileName;
+
+        File imgFile = new File(sDirPath);
+
+        //사진 이미지 찾지 못하는 경우 예외처리로 빈 이미지 파일을 설정한다.
+        if(imgFile.isFile()){
+            byte[] buf = new byte[1024];
+            int readByte = 0;
+            int length = 0;
+            byte[] imgBuf = null;
+
+            FileInputStream fileInputStream = null;
+            ByteArrayOutputStream outputStream = null;
+            ServletOutputStream out = null;
+
+            try{
+                fileInputStream = new FileInputStream(imgFile);
+                outputStream = new ByteArrayOutputStream();
+                out = response.getOutputStream();
+
+                while((readByte = fileInputStream.read(buf)) != -1){
+                    outputStream.write(buf, 0, readByte);
+                }
+
+                imgBuf = outputStream.toByteArray();
+                length = imgBuf.length;
+                out.write(imgBuf, 0, length);
+                out.flush();
+
+            }catch(IOException e){
+                e.printStackTrace();
+            }finally {
+                outputStream.close();
+                fileInputStream.close();
+                out.close();
             }
-            String realFileNm = "";
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
-            String today= formatter.format(new java.util.Date());
-            realFileNm = today+UUID.randomUUID().toString() + filename.substring(filename.lastIndexOf("."));
-            String rlFileNm = filePath + realFileNm;
-            ///////////////// 서버에 파일쓰기 /////////////////
-            InputStream is = request.getInputStream();
-            OutputStream os=new FileOutputStream(rlFileNm);
-            int numRead;
-            byte b[] = new byte[Integer.parseInt(request.getHeader("file-size"))];
-            while((numRead = is.read(b,0,b.length)) != -1){
-                os.write(b,0,numRead);
-            }
-            if(is != null) {
-                is.close();
-            }
-            os.flush();
-            os.close();
-            ///////////////// 서버에 파일쓰기 /////////////////
-            // 정보 출력
-            sFileInfo += "&bNewLine=true";
-            // img 태그의 title 속성을 원본파일명으로 적용시켜주기 위함
-            sFileInfo += "&sFileName="+ filename;;
-            sFileInfo += "&sFileURL="+"/resource/photo_upload/"+realFileNm;
-            PrintWriter print = response.getWriter();
-            print.print(sFileInfo);
-            print.flush();
-            print.close();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
-
-
-
 }
