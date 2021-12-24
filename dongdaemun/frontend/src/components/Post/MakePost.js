@@ -1,14 +1,13 @@
 import React from 'react'
 import axios from "axios"
 import { useState } from 'react';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import './MakePost.css'
 
 function MakePost() {
   const [postContent, setPostContent] = useState("");
   const [title, setTitle] = useState("");
-  const handleContent = (e) => {
-    setPostContent(e.target.value);
-  }
   const handleTitle = (e) => {
     setTitle(e.target.value);
   }
@@ -34,10 +33,19 @@ function MakePost() {
   
   return (
     <div className='MakePost'>
-      <div>게시글 작성하기</div>
-      <input value={title} onChange={handleTitle}></input>
-      <textarea value={postContent} onChange={handleContent}></textarea>
-      <button onClick={onSubmit}>업로드</button>
+      <input value={title} onChange={handleTitle}
+        placeholder='제목을 입력하세요'>          
+      </input>
+      <CKEditor
+        editor={ ClassicEditor }
+        data="<p></p>"        
+        onChange={ ( event, editor ) => {
+            const data = editor.getData();
+            console.log(data)
+            setPostContent(data);
+        } }
+      />
+      <button className='btn' onClick={onSubmit}>업로드</button>
     </div>
   )
 }
