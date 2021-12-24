@@ -29,7 +29,7 @@ public class IndexController {
         return new ResponseEntity<>(model, HttpStatus.OK);
     }
 
- /*
+    /*
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user) {
         //model.addAttribute("posts", postsService.findAllDesc());
