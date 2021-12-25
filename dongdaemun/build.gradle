@@ -13,6 +13,7 @@ repositories {
 }
 
 dependencies {
+	annotationProcessor('org.projectlombok:lombok')
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 	implementation('org.springframework.session:spring-session-jdbc')
 	implementation 'org.springframework.boot:spring-boot-starter-web'

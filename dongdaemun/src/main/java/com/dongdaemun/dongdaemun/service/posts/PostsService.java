@@ -42,7 +42,7 @@ public class PostsService {
         Posts postsEntity = postsRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id="+id));
 
-        List<Comments> commentsEntity = commentsRepository.findAllByPid(id);
+        List<Comments> commentsEntity = commentsRepository.findAllByPid(postsEntity);
 
         return new PostsAndCommentsResponseDto(postsEntity, commentsEntity);
     }
@@ -56,7 +56,7 @@ public class PostsService {
     public PostsAndCommentsPageResponseDto findPostsAndCommentsWithPageById(Long id, int page){
         Posts postsEntity = postsRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id="+id));
-        Page<Comments> commentsPageEntity = listComments(page);
+        Page<Comments> commentsPageEntity = listComments(postsEntity, page);
         return new PostsAndCommentsPageResponseDto(postsEntity, commentsPageEntity);
     }
 
@@ -80,8 +80,9 @@ public class PostsService {
 
     // 댓글 페이징 조회
     @Transactional
-    public Page<Comments> listComments(int page){
-        return commentsRepository.findAll(PageRequest.of(page,10, Sort.by(Sort.Direction.DESC, "cmtId")));
+    public Page<Comments> listComments(Posts post, int page){
+        Pageable paging = PageRequest.of(page,10, Sort.by(Sort.Direction.DESC, "pid"));
+        return commentsRepository.findAllByPid(post, paging);
     }
 
 

@@ -13,10 +13,12 @@ import com.dongdaemun.dongdaemun.web.dto.posts.PostsAndCommentsPageResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RequiredArgsConstructor
 @RestController
 public class MyPageController {
@@ -39,7 +41,7 @@ public class MyPageController {
     // 내가 작성한 글 더보기
     @GetMapping("/mypage/myposts")
     public ResponseEntity<?> postsview(@LoginUser SessionUser user
-            , @RequestParam(required = false, defaultValue = "0", value = "commentPage") int page){
+            , @RequestParam(required = false, defaultValue = "0", value = "page") int page){
         String email="";
         if(user!=null) {
             email = user.getEmail();
