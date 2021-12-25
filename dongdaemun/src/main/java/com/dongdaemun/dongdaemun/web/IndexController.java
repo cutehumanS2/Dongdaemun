@@ -38,7 +38,7 @@ public class IndexController {
         if (user != null) {
             model.addAttribute("userName", user.getName());
         }
-        ModelAndView mav = new ModelAndView("/index");
+        ModelAndView mav = new ModelAndView("index");
         return mav;
     }
 
