@@ -35,7 +35,7 @@ function ReadPost() {
     const headers = {
       "Content-Type": "application/json"
     }
-      const response = await axios.get('/view?category=notice&id=2&page=0', {headers});
+      const response = await axios.get('http://localhost:8080/view?category=notice&id=2&page=0', {headers});
       console.log(response.data);
     };
     console.log("출력!!!!"+posts);
