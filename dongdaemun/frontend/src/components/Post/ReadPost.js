@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useEffect} from "react";
+import React, { useState, useEffect} from "react";
 import "./ReadPost.css";
 import NavBar from "../NavBar/NavBar";
 import { Button } from "react-bootstrap";
@@ -42,19 +41,18 @@ function ReadPost() {
   
     useEffect(() => {
     getData();
-    }, []);
-
-
-
-
+    }, []); 
+  
 
   return (
- 
+    
     <div className="App">
       <div className="post-title">제목</div>
       <div className="post-writer">글 작성자</div>
       <div className="post-date">글 작성일</div>
       <div className="post-text">
+
+          게시글 내용
       </div>
       <div className="post-btn-row">
         <Button className="rewrite-btn" size="sm" variant="light">
