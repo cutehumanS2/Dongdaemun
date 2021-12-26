@@ -19,7 +19,4 @@ input {
   min-height: 30rem;
 }
 
-.btn {
-  display: flex;
-  background: linear-gradient(180deg, #539DDB 0%, rgba(83, 157, 219, 0) 100%), #084A83;
-}
+

@@ -47,8 +47,8 @@ function MyPage() {
           <div className='user'>{name}</div>  
         </div>
         <div>
-          <button className='logout btn'>로그아웃</button>            
-          <button className='exit btn'>회원 탈퇴</button>            
+          <button className='logout button'>로그아웃</button>            
+          <button className='exit button'>회원 탈퇴</button>            
         </div>
       </div>
 
