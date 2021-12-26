@@ -29,7 +29,7 @@ const mockList = [
         id: 1,
         title: "김눈송",
         content:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          "BE THE QUEEN, RULE THE WORLD",
         tag: "",
       },
       {
