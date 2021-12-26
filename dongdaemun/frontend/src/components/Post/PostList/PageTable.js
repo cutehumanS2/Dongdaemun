@@ -38,17 +38,12 @@ const PageTable = (props) => {
     return txt;
 }
 
-const [postId, setPostId] = useState();
-
-const handleClick = (id) => (event) => {
-  setPostId(id);
-}
 
 const renderPosts = posts.posts && posts.posts.map(post => {
     var text = post.content
   return (
       <div  key={post.id}>
-        <Link to= {`readpost/${post.id}`} style={{textDecoration: 'none'}} className='post'>
+        <Link to= {`readpost/${post.id}`} style={{textDecoration: 'none'}} className='posts'>
         <div className="downpostleft">
             <div>{post.title}</div><div>{textLengthOverCut(text,9,"...")}</div></div>
         <div className="downpostright">
@@ -61,25 +56,18 @@ const renderPosts = posts.posts && posts.posts.map(post => {
 
   return (
     <>
-    <BrowserRouter>
-      <div>
-        <Routes>
-          <Route path='/makepost' element={<MakePost />}></Route>
-          <Route path='/readpost' element={<ReadPost />}></Route>
-        </Routes>
-      </div>
     <div className="tablecss">
         <div className="titlebar">
       <p className='title'>공지 게시판</p>
       <Link to="/makepost" style={{textDecoration: 'none'}}>
         <button className="write" >글 작성하기</button></Link>
       </div>
-      <div className="bar">
+      <div className="namebar">
           <div>제목</div>
           <div>작성일</div>
         </div>
         
-          <div className='postContainer'>{renderPosts}</div>
+          <div className='postsContainer'>{renderPosts}</div>
           <script>console.log("게시글 Id: " + postId)</script>
 
       </div>
@@ -96,7 +84,6 @@ const renderPosts = posts.posts && posts.posts.map(post => {
         previousClassName={"pageLabel-btn"}
         nextClassName={"pageLabel-btn"}
       />
-    </BrowserRouter>
     </>
   );
 };
