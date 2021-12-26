@@ -9,7 +9,7 @@ import {BrowserRouter as BrowserRouter, Routes, Route, Link} from "react-router-
 import pagination from './Pagination';
 import "./Pagination.css"
 
-const PageTable = () => {
+const PageTable = (props) => {
   const [posts, setPosts] = useState({})
   const getData = async() => {
     const headers = {
@@ -20,7 +20,6 @@ const PageTable = () => {
     console.log(response.data);
     setPosts(response.data);
   };
-  console.log("출력" + posts);
 
   useEffect(() => {
     getData();
@@ -39,19 +38,22 @@ const PageTable = () => {
     return txt;
 }
 
-const getId = () => {
-  
+const [postId, setPostId] = useState();
+
+const handleClick = (id) => (event) => {
+  setPostId(id);
 }
 
 const renderPosts = posts.posts && posts.posts.map(post => {
     var text = post.content
-    var id = post.id
   return (
-      <div className='post' key={post.id}>
+      <div  key={post.id}>
+        <Link to= {`readpost/${post.id}`} style={{textDecoration: 'none'}} className='post'>
         <div className="downpostleft">
             <div>{post.title}</div><div>{textLengthOverCut(text,9,"...")}</div></div>
         <div className="downpostright">
             <div>{post.createDate2}</div><div>{post.uid}</div></div>
+        </Link>
       </div>
     )
   })
@@ -76,12 +78,10 @@ const renderPosts = posts.posts && posts.posts.map(post => {
           <div>제목</div>
           <div>작성일</div>
         </div>
-        <Link to= {{
-          pathname: "/readpost",
-          state: 4,
-          }} style={{textDecoration: 'none'}}>
-          <div className='postContainer' onClick={getId}>{renderPosts}</div>
-          </Link>
+        
+          <div className='postContainer'>{renderPosts}</div>
+          <script>console.log("게시글 Id: " + postId)</script>
+
       </div>
       <Pagination className="pagination"
         pageCount={5} // totalRecords
