@@ -23,8 +23,14 @@ const MyPagePost = () => {
   const renderPosts = posts.content && posts.content.map(post => {
     return (
       <div className='post' key={post.id}>
+        <a
+            href={`readpost/${post.category}/${post.id}`}
+            style={{ textDecoration: "none" }}
+            className="posts"
+          >
         <div>{post.title}</div>
         <div>{post.createDate2}</div>
+        </a>
       </div>
     )
   })
@@ -42,6 +48,7 @@ const MyPagePost = () => {
         </div>
           <div className='postContainer'>{renderPosts}</div>
       </div>
+      
     </>
   );
 };
