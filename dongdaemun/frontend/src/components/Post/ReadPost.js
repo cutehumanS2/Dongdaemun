@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./ReadPost.css";
 import NavBar from "../NavBar/NavBar";
 import { Button } from "react-bootstrap";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useParams, useNavigate } from "react-router-dom";
 import Recommend from "./Comments";
 import axios from "axios";
 import queryString from "query-string";
@@ -34,6 +34,8 @@ function ReadPost() {
     getData();
   }, []);
 
+
+  let navigate = useNavigate()
   const postDelete = () => {
     axios
       .delete(baseURL + "/delete?category=" + category + "&id=" + id)
@@ -46,6 +48,7 @@ function ReadPost() {
       .then(function () {
         // always executed
         //이전 화면으로 돌아가기, history.push()
+        navigate(-1);
       });
   };
 
