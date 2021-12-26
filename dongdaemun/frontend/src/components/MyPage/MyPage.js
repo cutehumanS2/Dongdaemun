@@ -55,12 +55,12 @@ function MyPage() {
 
       <div className='bar'>
         <div>내가 쓴 글</div>
-        <Link to='/post'>더보기</Link>
+        <Link to='/mypage/post'>더보기</Link>
       </div>
       <div className='postContainer'>{renderPosts}</div>
       <div className='bar'>
         <div>내가 쓴 댓글</div>
-        <Link to='/comment'>더보기</Link>
+        <Link to='/mypage/comment'>더보기</Link>
       </div>
       <div className='postContainer'>{renderComments}</div>
     </div>
