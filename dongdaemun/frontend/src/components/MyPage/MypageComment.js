@@ -2,30 +2,25 @@ import React, {useState, useEffect} from 'react';
 import Pagination from '../Post/PostList/Pagination';
 import { paginate } from '../Post/PostList/paginate';
 import "../Post/PostList/Table.css"
+import axios from "axios";
 
 const MyPageComment = () => {
-    const posts = [
-      {
-        "createDate": "2021-12-20T20:26:31.495907", //LocalDateTime
-        "modifieDate": "2021-12-20T20:26:31.495907", //LocalDateTime
-        "id": 2, //Long
-        "uid": "minpearl0826@gmail.com", //String
-        "title": "공지1", //String
-        "content": "ㅇ", //String
-        "anony": false //boolean
-    },
-    {
-        "createDate": "2021-12-20T19:52:31.305561",
-        "modifieDate": "2021-12-20T19:52:31.305561",
-        "id": 1,
-        "uid": "none",
-        "title": "공지1",
-        "content": "ㅇㄹㄴ",
-        "anony": false
+  const [posts, setPosts] = useState();
+  const getData = async() => {
+    const headers = {
+      "Content-Type": "application/json"
     }
-    ];
+    const response = await axios.get('/mypage/mycomments?commentPage=0', {headers});
+    console.log(response.data.content);
+    setPosts(response.data);
+  };
+  console.log("출력" + posts);
 
-const renderPosts = posts && posts.map(post => {
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const renderPosts = posts.content && posts.content.map(post => {
     return (
       <div className='post' key={post.id}>
         <div>{post.title}</div>
