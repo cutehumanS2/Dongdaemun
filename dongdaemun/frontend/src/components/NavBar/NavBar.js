@@ -2,10 +2,11 @@ import React from 'react';
 import "./NavBar.css";
 import { Navbar, Nav, Container, Button } from "react-bootstrap";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import {useState} from 'react';
 
 function NavBar() {
+  const [pagename, setPageName] = useState();
   return (
-    <Router>
       <div className="App">
         <Navbar className="navBar">
           <Container>
@@ -17,9 +18,9 @@ function NavBar() {
               ></img>
             </Navbar.Brand>
             <Nav className="me-auto">
-              <Nav.Link href="/notice">공지 게시판</Nav.Link>
-              <Nav.Link href="/activity">활동 게시판</Nav.Link>
-              <Nav.Link href="/anon">익명 게시판</Nav.Link>
+              <Nav.Link href="/pagetable/notice">공지 게시판</Nav.Link>
+              <Nav.Link href="/pagetable/activity">활동 게시판</Nav.Link>
+              <Nav.Link href="/pagetable/anon">익명 게시판</Nav.Link>
               <Button
                 variant="default"
                 size="sm"
@@ -48,14 +49,6 @@ function NavBar() {
           </Container>
         </Navbar>
       </div>
-      <div>
-        <Routes>
-          <Route path="/notice" >
-{/* 컴포넌트 삽입 */}
-          </Route>
-        </Routes>
-      </div>
-    </Router>
   );
 }
 
