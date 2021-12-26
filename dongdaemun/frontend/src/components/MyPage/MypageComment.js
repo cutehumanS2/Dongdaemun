@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import Pagination from '../Post/Pagination';
-import { paginate } from '../Post/paginate';
+import Pagination from '../Post/PostList/Pagination';
+import { paginate } from '../Post/PostList/paginate';
 import "./Post.Table.css"
 
 const MypageComment = () => {
@@ -37,7 +37,7 @@ const renderPosts = posts && posts.map(post => {
 
   return (
     <>
-    <div className="table">
+    <div className="tablecss">
         <div className="titlebar">
       <p className='title'>내가 쓴 댓글</p>
       </div>

@@ -1,35 +1,31 @@
 import React, {useState, useEffect} from 'react';
-import Pagination from '../Post/Pagination';
-import { paginate } from '../Post/paginate';
-import "./Post.Table.css"
+import Pagination from '../Post/PostList/Pagination';
+import { paginate } from '../Post/PostList/paginate';
+import "../Post/Table.css"
+import axios from "axios";
 
 const MypagePost = () => {
-    const posts = [
-      {
-        "createDate": "2021-12-20T20:26:31.495907", //LocalDateTime
-        "modifieDate": "2021-12-20T20:26:31.495907", //LocalDateTime
-        "id": 2, //Long
-        "uid": "minpearl0826@gmail.com", //String
-        "title": "공지1", //String
-        "content": "ㅇ", //String
-        "anony": false //boolean
-    },
-    {
-        "createDate": "2021-12-20T19:52:31.305561",
-        "modifieDate": "2021-12-20T19:52:31.305561",
-        "id": 1,
-        "uid": "none",
-        "title": "공지1",
-        "content": "ㅇㄹㄴ",
-        "anony": false
-    }
-    ];
+  const [posts, setPosts] = useState({})
+const getData = async() => {
+  const headers = {
+    "Content-Type": "application/json"
+  }
 
-const renderPosts = posts && posts.map(post => {
+  const response = await axios.get('http://ec2-15-165-95-188.ap-northeast-2.compute.amazonaws.com:8080/mypage/myposts?page=0', {headers});
+  console.log(response.data);
+  setPosts(response.data);
+};
+console.log("출력" + posts);
+
+useEffect(() => {
+  getData();
+}, []);
+
+const renderPosts = posts.posts && posts.posts.map(post => {
     return (
       <div className='post' key={post.id}>
         <div>{post.title}</div>
-        <div>{post.createDate}</div>
+        <div>{post.createDate2}</div>
       </div>
     )
   })
@@ -37,7 +33,7 @@ const renderPosts = posts && posts.map(post => {
 
   return (
     <>
-    <div className="table">
+    <div className="tablecss">
         <div className="titlebar">
       <p className='title'>내가 쓴 글</p>
       </div>
