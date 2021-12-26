@@ -1,0 +1,104 @@
+ .tablecss {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  }
+      
+    /* user info section */
+    .write {
+      display: flex;
+      font-weight: bold;
+      background-color: #539ddb;
+      margin-right: 0.4rem;
+      border-radius: 20px;
+      border: 0;
+      color: white;
+      padding: 0.5rem;
+    }
+    
+    /* my post section */
+  .bar {
+      display: flex;
+      width: 60%;
+      height: 3rem;
+      margin-top: 2%;
+      align-items: center;
+      background: rgba(198, 229, 243, 0.4);
+      justify-content: space-between;
+      font-weight: bold;
+      border: 0;
+      border-radius: 6px 6px 0px 0px;
+    }
+
+  .titlebar {
+    display: flex;
+    width: 60%;
+    height: 3rem;
+    margin-top: 2rem;
+    justify-content: space-between;
+    font-weight: bold;
+    align-content: center;
+    align-items: center;
+    }
+
+    .bar > div:nth-child(1) {
+      margin-left: 1rem;
+    }
+    .bar > div:nth-child(2) {
+      margin-right: 1rem;
+    }
+    .post {
+      display: flex;
+      height: 2.5rem;
+      justify-content: space-between;
+      flex-direction: row;
+      align-items: center;
+      padding: 1rem;
+      margin-top: 0.1rem;
+      margin-bottom: 0.1rem;
+      border-bottom: 1px solid black;
+      padding-bottom: 3rem
+    }
+
+    .downpostleft {
+      display: flex;
+      height: 2.5rem;
+      justify-content: space-between;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 3%;
+      margin-top: 1%;
+      margin-bottom: 1%;
+    }
+
+    .downpostright {
+      display: flex;
+      height: 2.5rem;
+      justify-content: space-between;
+      flex-direction: column;
+      align-items: flex-end;
+      padding: 3%;
+      margin-top: 1%;
+      margin-bottom: 1%;
+    }
+
+    .postContainer {
+      display: flex;
+      width: 55%;
+      white-space: pre-wrap;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-content: space-around;
+      justify-content: center;
+      align-items: stretch;
+    }
+  
+  .title {
+    display: flex;
+    font-weight: bold;
+    padding : 1%;
+    font-size: 130%;
+    align-content: center;
+  }

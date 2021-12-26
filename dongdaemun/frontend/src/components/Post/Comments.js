@@ -1,5 +1,22 @@
 import React, { useState } from "react";
 import "./Comments.css";
+import axios from "axios";
+
+// const baseUrl = "http://localhost:8080";
+// const params = {category:[1], pid:[1], cid:[12]};
+// axios.get('http://localhost:8080/updateCmt', {
+//   params
+//   }
+// )
+// .then(function (response) {
+//   console.log(response);
+// })
+// .catch(function (error) {
+//   console.log(error);
+// })
+// .then(function () {
+//   // always executed
+// }); 
 
 const mockList = [
   {
@@ -70,7 +87,7 @@ const Comments = () => {
                 </div>
                 {isShowRpInput && (
                   <div className="input-wrapper">
-                    <input value="" className="input"  placeholder="대댓글을 달아주세요" />
+                    <input className="input"  placeholder="대댓글을 달아주세요" />
                     <button
                       className="submit"
                       onClick={() => handleSubmitReply}
@@ -97,10 +114,10 @@ const Comments = () => {
                   })}
                 </ul>
                 <div className="input-wrapper">
-                    <input value="" className="input" placeholder="  댓글을 달아주세요" />
+                    <input className="input" placeholder="  댓글을 달아주세요" />
                     <button
                       className="submit"
-                      onClick={() => handleSubmitCommentOrReply}
+                      onClick={() => handleSubmitComment}
                     >
                       등록
                     </button>
