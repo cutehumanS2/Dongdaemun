@@ -4,18 +4,15 @@ import { useState } from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import './MakePost.css'
-import {useParams} from "react-router-dom"
 
-function MakePost(props) {
-  let {category} = useParams();
-  console.log("넘어오는 데이터: ", category);
-  
+function EditPost() {
   const [postContent, setPostContent] = useState("");
   const [title, setTitle] = useState("");
   const handleTitle = (e) => {
     setTitle(e.target.value);
   }
-  
+
+  let category = "notice";
   let infos = JSON.stringify ({
     uid: "uid",
     title: title,
@@ -27,7 +24,7 @@ function MakePost(props) {
     const headers = {
       "Content-Type": "application/json"
     }
-    const response = await axios.post('http://ec2-15-165-95-188.ap-northeast-2.compute.amazonaws.com:8080/save?category=' + category, infos, {headers});
+    const response = await axios.post('/save?category=' + category, infos, {headers});
     console.log(response.data)
     setPostContent(response.data);
     setPostContent("");  
@@ -41,7 +38,7 @@ function MakePost(props) {
       </input>
       <CKEditor
         editor={ ClassicEditor }
-        data="<p> </p>"        
+        data="<p>게시글 id로 접근해서 글 내용 여기에 넣기</p>"        
         onChange={ ( event, editor ) => {
             const data = editor.getData();
             console.log(data)
@@ -53,4 +50,4 @@ function MakePost(props) {
   )
 }
 
-export default MakePost
+export default EditPost
