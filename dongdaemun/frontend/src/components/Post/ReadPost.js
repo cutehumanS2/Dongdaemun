@@ -3,13 +3,13 @@ import "./ReadPost.css";
 import NavBar from "../NavBar/NavBar";
 import { Button } from "react-bootstrap";
 import Recommend from "./Comments";
-
-
+import {useParams} from "react-router-dom"
 
 function ReadPost() {
-
+  let {category, id} = useParams();
+  console.log("넘어오는 카테고리: ", category);
+  console.log("넘어오는 아이디:", id);
   
-
   return (
     
     <div className="App">
