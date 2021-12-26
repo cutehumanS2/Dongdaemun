@@ -2,7 +2,8 @@ import React from 'react'
 import './MyPage.css';
 import axios from "axios"
 import { useState, useEffect } from 'react';
-import {Link} from "react-router-dom"
+import { Link } from 'react-router-dom';
+
 
 function MyPage() {
   const [name, setName] = useState();
@@ -33,7 +34,7 @@ function MyPage() {
   const renderComments = comments && comments.map(comment => {
     return (
       <div className='post' key={comment.id}>
-        <div>{comment.title}</div>
+        <div>{comment.cmt_content}</div>
         <div>{comment.createDate2}</div>
       </div>
     )
@@ -47,20 +48,19 @@ function MyPage() {
           <div className='user'>{name}</div>  
         </div>
         <div>
-          <button className='logout btn'>로그아웃</button>            
-          <button className='exit btn'>회원 탈퇴</button>            
+          <button className='logout button'>로그아웃</button>            
+          <button className='exit button'>회원 탈퇴</button>            
         </div>
       </div>
 
       <div className='bar'>
         <div>내가 쓴 글</div>
-        <Link to='/post'>더보기</Link>
-        <div>더보기</div>
+        <Link to='/mypage/post'>더보기</Link>
       </div>
       <div className='postContainer'>{renderPosts}</div>
       <div className='bar'>
         <div>내가 쓴 댓글</div>
-        <div>더보기</div>
+        <Link to='/mypage/comment'>더보기</Link>
       </div>
       <div className='postContainer'>{renderComments}</div>
     </div>

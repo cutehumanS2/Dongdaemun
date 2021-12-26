@@ -85,11 +85,14 @@ function ReadPost() {
       </div>
 
       <div className="post-btn-row">
-        <Link to="/editpost" style={{ textDecoration: "none" }}>
+        <a
+            href={`editpost/${category}/${id}`}
+            style={{ textDecoration: "none" }}
+          >
           <Button className="rewrite-btn" size="sm" variant="light">
             수정하기
           </Button>
-        </Link>
+        </a>
 
         <Button
           onClick={postDelete}
