@@ -15,7 +15,7 @@ function LandingPage() {
         </Button></a>
         <br />
         <a href='/oauth2/authorization/naver'>
-          <Button variant="warning" className="btn-naver">
+          <Button variant="success" className="btn-naver">
             네이버 로그인
         </Button></a>
       </header>
