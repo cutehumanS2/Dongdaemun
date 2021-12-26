@@ -43,8 +43,8 @@ function EditPost() {
     title: title,
     content: postContent,
     category: category,
-    anony: false
-  })
+    anony: false,
+  });
   const onSubmit = async () => {
     const headers = {
       "Content-Type": "application/json"
@@ -52,10 +52,10 @@ function EditPost() {
     const response = await axios.post('http://ec2-15-165-95-188.ap-northeast-2.compute.amazonaws.com:8080/update?category=' + category + '&id=' + id, infos, {headers});
     console.log(response.data)
     setPostContent(response.data);
-    setPostContent("");  
+    setPostContent("");
     setTitle("");
   };
-  
+
   return (
     <div className='MakePost'>
       <input value={title} onChange={handleTitle}
@@ -70,9 +70,11 @@ function EditPost() {
             setPostContent(data);
         } }
       />
-      <button className='btn' onClick={onSubmit}>업로드</button>
+      <button className="btn" onClick={onSubmit}>
+        업로드
+      </button>
     </div>
-  )
+  );
 }
 
-export default EditPost
+export default EditPost;

@@ -8,28 +8,6 @@ import axios from "axios";
 import queryString from "query-string";
 
 function ReadPost() {
-  // const getParams = ({path}) => {
-  //   const location = path;
-  //   const query = queryString.parse(location.search);
-  //   console.log("test" + query)
-  // }
-
-  // var newURL = window.location.pathname;
-  // const query = queryString.parse(newURL);
-  // console.log(query);
-
-  //   const testUrl = new URL("http://ec2-15-165-95-188.ap-northeast-2.compute.amazonaws.com:8080/view?category= notice&id=2&page=0")
-  // const sch = testUrl.search;
-  // const params = new URLSearchParams(sch);
-  // const keyword = params.get('id');
-
-  // console.log("test-id:" + keyword);
-
-  // const params = useParams();
-  // const [topic, setTopic] = useState({
-  //   title: 'category',
-  //   description: 'Not Found',
-  // });
 
   let { category, id } = useParams();
   console.log("넘어오는 카테고리: ", category);
@@ -58,7 +36,7 @@ function ReadPost() {
 
   const postDelete = () => {
     axios
-      .delete(baseURL + "/delete?category=notice&id=3")
+      .delete(baseURL + "/delete?category=" + category + "&id=" + id)
       .then(function (response) {
         console.log(response);
       })
