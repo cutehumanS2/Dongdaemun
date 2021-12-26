@@ -23,8 +23,14 @@ const MyPageComment = () => {
   const renderPosts = posts.content && posts.content.map(post => {
     return (
       <div className='post' key={post.id}>
+        <a
+            href={`readpost/${post.category}/${post.id}`}
+            style={{ textDecoration: "none" }}
+            className="posts"
+          >
         <div>{post.title}</div>
         <div>{post.createDate}</div>
+        </a>
       </div>
     )
   })
