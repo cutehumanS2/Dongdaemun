@@ -19,7 +19,7 @@
     }
     
     /* my post section */
-  .bar {
+  .namebar {
       display: flex;
       width: 60%;
       height: 3rem;
@@ -43,15 +43,16 @@
     align-items: center;
     }
 
-    .bar > div:nth-child(1) {
+    .namebar > div:nth-child(1) {
       margin-left: 1rem;
     }
-    .bar > div:nth-child(2) {
+    .namebar > div:nth-child(2) {
       margin-right: 1rem;
     }
-    .post {
+    .posts {
       display: flex;
       height: 2.5rem;
+      width: 100%;
       justify-content: space-between;
       flex-direction: row;
       align-items: center;
@@ -84,9 +85,9 @@
       margin-bottom: 1%;
     }
 
-    .postContainer {
+    .postsContainer {
       display: flex;
-      width: 55%;
+      width: 60%;
       white-space: pre-wrap;
       flex-direction: column;
       flex-wrap: nowrap;

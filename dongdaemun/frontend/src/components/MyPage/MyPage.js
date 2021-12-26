@@ -2,6 +2,7 @@ import React from 'react'
 import './MyPage.css';
 import axios from "axios"
 import { useState, useEffect } from 'react';
+import {Link} from "react-router-dom"
 
 function MyPage() {
   const [name, setName] = useState();

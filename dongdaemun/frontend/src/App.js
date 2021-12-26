@@ -16,7 +16,7 @@ return (
       <div>        
         <Routes>
           <Route exact path="/" element={<LandingPage />}></Route>
-          <Route path="/notice" element={<PageTable />}></Route>
+          <Route path="/pagetable" element={<PageTable />}></Route>
           <Route path="/makepost" element={<MakePost />}></Route>
           <Route path="/readpost" element={<ReadPost />}></Route>
           <Route path="/mypage" element={<MyPage />}></Route>
