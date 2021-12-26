@@ -7,6 +7,7 @@ import MyPageComment from './components/MyPage/MyPageComment';
 import ReadPost from './components/Post/ReadPost';
 import LandingPage from './components/LandingPage/LandingPage';
 import PageTable from './components/Post/PostList/PageTable';
+import NavBar from './components/NavBar/NavBar';
 
 function App () {
 
@@ -16,14 +17,15 @@ return (
       <div>        
         <Routes>
           <Route exact path="/" element={<LandingPage />}></Route>
-          <Route path="/pagetable" element={<PageTable />}></Route>
-          <Route path="/makepost" element={<MakePost />}></Route>
-          <Route path="/readpost" element={<ReadPost />}></Route>
+          <Route path="/pagetable/:category" element={<PageTable />}></Route>
+          <Route path="/pagetable/makepost/:category" element={<MakePost />}></Route>
+          <Route path="/pagetable/readpost/:category/:id" element={<ReadPost />}></Route>
           <Route path="/mypage" element={<MyPage />}></Route>
           <Route path="/mypage/post" element={<MyPagePost />}></Route>
           <Route path="/mypage/comment" element={<MyPageComment />}></Route>
         </Routes>
       </div>
+      <NavBar />
     </BrowserRouter> 
   </div>
 )}
