@@ -1,5 +1,7 @@
 package com.dongdaemun.dongdaemun.web;
 
+import com.dongdaemun.dongdaemun.config.auth.LoginUser;
+import com.dongdaemun.dongdaemun.config.auth.dto.SessionUser;
 import com.dongdaemun.dongdaemun.service.posts.PostsService;
 import com.dongdaemun.dongdaemun.web.dto.posts.PostsAndCommentsPageResponseDto;
 import com.dongdaemun.dongdaemun.web.dto.posts.PostsAndCommentsResponseDto;
@@ -58,7 +60,11 @@ public class PostsApiController {
 
     /* 게시판 목록 조회 */
     @GetMapping("/list")
-    public ResponseEntity<?> list(Model model, @RequestParam("category") String category, @RequestParam(required = false, defaultValue = "0", value = "page") int page){
+    public ResponseEntity<?> list(Model model, @RequestParam("category") String category, @RequestParam(required = false, defaultValue = "0", value = "page") int page, @LoginUser SessionUser user){
+        if(user != null){
+            model.addAttribute("userName", user.getName());
+        }
+
         Page<?> listPage = null;
         int totalPage;
         listPage = postsService.list(category, page);
