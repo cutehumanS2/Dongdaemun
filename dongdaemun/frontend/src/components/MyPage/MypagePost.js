@@ -6,22 +6,21 @@ import axios from "axios";
 
 const MyPagePost = () => {
   const [posts, setPosts] = useState({})
-const getData = async() => {
-  const headers = {
-    "Content-Type": "application/json"
-  }
+  const getData = async() => {
+    const headers = {
+      "Content-Type": "application/json"
+    }
+    const response = await axios.get('/mypage/myposts?page=0', {headers});
+    console.log(response.data.content);
+    setPosts(response.data);
+  };
+  console.log("출력" + posts);
 
-  const response = await axios.get('http://ec2-15-165-95-188.ap-northeast-2.compute.amazonaws.com:8080/mypage/myposts?page=0', {headers});
-  console.log(response.data);
-  setPosts(response.data);
-};
-console.log("출력" + posts);
+  useEffect(() => {
+    getData();
+  }, []);
 
-useEffect(() => {
-  getData();
-}, []);
-
-const renderPosts = posts.posts && posts.posts.map(post => {
+  const renderPosts = posts.content && posts.content.map(post => {
     return (
       <div className='post' key={post.id}>
         <div>{post.title}</div>
