@@ -48,7 +48,20 @@ const MyPagePost = () => {
         </div>
           <div className='postContainer'>{renderPosts}</div>
       </div>
-      
+      <Pagination
+        className="pagination"
+        pageCount={posts.totalPages} // totalRecords
+        pageRangeDisplayed={5}
+        marginPagesDisplayed={0}
+        itemsCountPerPage={10}
+        previousLabel={"◀"}
+        nextLabel={"▶"}
+        //onPageChange={changePage}
+        containerClassName={"pagination-ul"}
+        activeClassName={"currentPage"}
+        previousClassName={"pageLabel-btn"}
+        nextClassName={"pageLabel-btn"}
+      />
     </>
   );
 };
