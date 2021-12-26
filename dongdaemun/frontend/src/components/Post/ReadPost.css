@@ -17,7 +17,7 @@
   margin: auto;
   text-align: right;
 
-  font-size: smaller;
+  font-size: x-small;
 }
 .post-date {
   text-align: right;
@@ -25,12 +25,14 @@
   margin: auto;
   text-align: right;
 
-  font-size: x-small;
+  font-size: xx-small;
 }
 .post-text {
+  text-align: left;
   min-height: 200px;
-  border-style: solid;
+  border-style: solid;   /* 테스트용 */
 
+font-size: small;
   margin: auto;
   width: 50%;
 }

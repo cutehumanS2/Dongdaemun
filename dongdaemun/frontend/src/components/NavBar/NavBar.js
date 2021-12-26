@@ -1,7 +1,7 @@
 import React from 'react';
 import "./NavBar.css";
 import { Navbar, Nav, Container, Button } from "react-bootstrap";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 function NavBar() {
   return (
@@ -49,11 +49,11 @@ function NavBar() {
         </Navbar>
       </div>
       <div>
-        <Switch>
+        <Routes>
           <Route path="/notice" >
 {/* 컴포넌트 삽입 */}
           </Route>
-        </Switch>
+        </Routes>
       </div>
     </Router>
   );
