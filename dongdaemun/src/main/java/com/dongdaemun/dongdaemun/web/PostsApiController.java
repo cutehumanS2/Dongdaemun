@@ -60,11 +60,7 @@ public class PostsApiController {
 
     /* 게시판 목록 조회 */
     @GetMapping("/list")
-    public ResponseEntity<?> list(Model model, @RequestParam("category") String category, @RequestParam(required = false, defaultValue = "0", value = "page") int page, @LoginUser SessionUser user){
-        if(user != null){
-            model.addAttribute("userName", user.getName());
-        }
-
+    public ResponseEntity<?> list(Model model, @RequestParam("category") String category, @RequestParam(required = false, defaultValue = "0", value = "page") int page){
         Page<?> listPage = null;
         int totalPage;
         listPage = postsService.list(category, page);

@@ -6,11 +6,14 @@ import axios from "axios";
 
 const MyPageComment = () => {
   const [posts, setPosts] = useState();
+  const email="seohyeon0319@sookmyung.ac.kr"
+  const baseUrl = "http://localhost:8080";
+
   const getData = async() => {
     const headers = {
       "Content-Type": "application/json"
     }
-    const response = await axios.get('/mypage/mycomments?commentPage=0', {headers});
+    const response = await axios.get(baseUrl+'/mypage/mycomments?commentPage=0&email='+email, {headers});
     console.log(response.data.content);
     setPosts(response.data);
   };

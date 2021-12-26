@@ -26,6 +26,7 @@ return (
           <Route path="/mypage" element={<MyPage />}></Route>
           <Route path="/mypage/post" element={<MyPagePost />}></Route>
           <Route path="/mypage/comment" element={<MyPageComment />}></Route>
+          <Route path="/mypage/pagetable/readpost/:category/:id" element={<ReadPost />}></Route>
           <Route path="pagetable/readpost/:category/editpost/:category/:id" element={<EditPost/>}></Route>
         </Routes>
       </div>

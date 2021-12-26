@@ -29,37 +29,38 @@ public class MyPageController {
     // 내가 작성한 글
     // 내가 작성한 댓글이 포함된 글
     @GetMapping("/mypage")
-    public ResponseEntity<MyProfileAndMyPostsAndMyCommentsResponseDto> profileview(@LoginUser SessionUser user){
-        String email="";
-        if(user!=null) {
-            email = user.getEmail();
-        }
+    public ResponseEntity<MyProfileAndMyPostsAndMyCommentsResponseDto> profileview(/*@LoginUser SessionUser user*/ @RequestParam("email") String email){
+//        String email="";
+//        if(user!=null) {
+//            email = user.getEmail();
+//        }
+        System.out.println(email);
         return ResponseEntity.ok()
                 .body(myPageService.findByEmail(email));
     }
 
     // 내가 작성한 글 더보기
     @GetMapping("/mypage/myposts")
-    public ResponseEntity<?> postsview(@LoginUser SessionUser user
-            , @RequestParam(required = false, defaultValue = "0", value = "page") int page){
-        String email="";
-        if(user!=null) {
-            email = user.getEmail();
-            System.out.println(email);
-        }
+    public ResponseEntity<?> postsview(/*@LoginUser SessionUser user, */
+            @RequestParam("email") String email, @RequestParam(required = false, defaultValue = "0", value = "page") int page){
+//        String email="";
+//        if(user!=null) {
+//            email = user.getEmail();
+//            System.out.println(email);
+//        }
         return ResponseEntity.ok().body(myPageService.myPostsList(email, page));
     }
 
 
     // 내가 작성한 댓글의 글 더보기
     @GetMapping("/mypage/mycomments")
-    public ResponseEntity<?> commentsview(@LoginUser SessionUser user
-            , @RequestParam(required = false, defaultValue = "0", value = "commentPage") int page){
-        String email="";
-        if(user!=null) {
-            email = user.getEmail();
-            System.out.println(email);
-        }
+    public ResponseEntity<?> commentsview(/*@LoginUser SessionUser user, */
+            @RequestParam("email") String email, @RequestParam(required = false, defaultValue = "0", value = "commentPage") int page){
+//        String email="";
+//        if(user!=null) {
+//            email = user.getEmail();
+//            System.out.println(email);
+//        }
 
         return ResponseEntity.ok().body(myPageService.myCommentsList(email, page));
     }
