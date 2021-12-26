@@ -53,6 +53,7 @@ function MyPage() {
 
       <div className='bar'>
         <div>내가 쓴 글</div>
+        <Link to='/post'>더보기</Link>
         <div>더보기</div>
       </div>
       <div className='postContainer'>{renderPosts}</div>

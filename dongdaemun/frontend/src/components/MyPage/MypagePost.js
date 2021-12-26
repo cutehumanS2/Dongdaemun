@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import Pagination from '../Post/PostList/Pagination';
 import { paginate } from '../Post/PostList/paginate';
-import "../Post/Table.css"
+import "../Post/PostList/Table.css"
 import axios from "axios";
 
-const MypagePost = () => {
+const MyPagePost = () => {
   const [posts, setPosts] = useState({})
 const getData = async() => {
   const headers = {
@@ -47,4 +47,4 @@ const renderPosts = posts.posts && posts.posts.map(post => {
   );
 };
 
-export default MypagePost;
+export default MyPagePost;

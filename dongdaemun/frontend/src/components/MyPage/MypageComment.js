@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import Pagination from '../Post/PostList/Pagination';
 import { paginate } from '../Post/PostList/paginate';
-import "./Post.Table.css"
+import "../Post/PostList/Table.css"
 
-const MypageComment = () => {
+const MyPageComment = () => {
     const posts = [
       {
         "createDate": "2021-12-20T20:26:31.495907", //LocalDateTime
@@ -51,4 +51,4 @@ const renderPosts = posts && posts.map(post => {
   );
 };
 
-export default MypageComment;
+export default MyPageComment;

@@ -9,13 +9,15 @@ function LandingPage() {
         <img src="img/ddm_logo.png" className="logo-img" alt="logo" />
         <p className="logo-name">Dongdaemoon</p>
         <p className="logo-explain">동아리 대문을 열어라</p>
-        <Button variant="secondary" className="btn-google">
-          구글 로그인
-        </Button>
+        <a href='/oauth2/authorization/google'>
+          <Button variant="secondary" className="btn-google">
+            구글 로그인
+        </Button></a>
         <br />
-        <Button variant="warning" className="btn-kakao">
-          카카오 로그인
-        </Button>
+        <a href='/oauth2/authorization/naver'>
+          <Button variant="warning" className="btn-naver">
+            네이버 로그인
+        </Button></a>
       </header>
     </div>
   );
