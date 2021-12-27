@@ -3,7 +3,7 @@ import "./ReadPost.css";
 import NavBar from "../NavBar/NavBar";
 import { Button } from "react-bootstrap";
 import { Link, useLocation, useParams, useNavigate } from "react-router-dom";
-import Recommend from "./Comments";
+import Comments from "./Comments";
 import axios from "axios";
 import queryString from "query-string";
 
