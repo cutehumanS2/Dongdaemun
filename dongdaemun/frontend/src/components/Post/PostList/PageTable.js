@@ -26,12 +26,11 @@ const PageTable = (props) => {
       "Content-Type": "application/json"
     }
     const baseUrl = "http://ec2-15-165-95-188.ap-northeast-2.compute.amazonaws.com:8080";
-    // const baseUrl = "http://localhost:8080";
     const response = await axios.get(baseUrl + '/list?category='+category+'&page=0');
     console.log(response.data);
     setPosts(response.data);
   };
- 
+
   const textLengthOverCut = (txt, len, lastTxt) => {
     if (len == "" || len == null) {
       // 기본값
@@ -46,6 +45,11 @@ const PageTable = (props) => {
     }
     return txt;
   };
+
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   var tabletitle = "게시판 이름";
 
