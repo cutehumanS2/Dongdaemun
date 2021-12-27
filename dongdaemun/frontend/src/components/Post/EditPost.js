@@ -6,6 +6,8 @@ import "./MakePost.css";
 import { useParams, useNavigate } from "react-router-dom";
 
 function EditPost() {
+    const email="seohyeon0319@sookmyung.ac.kr"
+
   let { category, id } = useParams();
   console.log("넘어오는 카테고리: ", category);
   console.log("넘어오는 아이디:", id);
@@ -18,11 +20,11 @@ function EditPost() {
       "Content-Type": "application/json",
     };
     const response = await axios.get(
-      baseURL + "/view?category=" + category + "&id=" + id + "&page=0"
+      baseURL + "/view?category=" + category + "&id=" + id + "&page=0"+"&email=" + email
     );
     console.log(response.data);
 
-    setPosts({ posts, ...response.data.posts });
+    setPosts({ posts, ...response.data.postsAndCommentsPageResponseDto.posts });
   };
   console.log("출력!!!!" + posts);
 
@@ -54,7 +56,7 @@ function EditPost() {
       "http://ec2-15-165-95-188.ap-northeast-2.compute.amazonaws.com:8080/update?category=" +
         category +
         "&id=" +
-        id,
+        id+"&email=" + email,
       infos,
       { headers }
     );
