@@ -15,9 +15,11 @@
 }
 .logo-explain {
   font-size: medium;
+  font-weight: bold;
 }
 .btn-google {
   margin-top: 5%;
+  font-weight: bold;
 }
 
 .App-header {
