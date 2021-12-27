@@ -44,22 +44,27 @@ public class PostsApiController {
     /* 게시글 조회 */
     // 댓글 전체 조회
     @GetMapping("/view/scroll")
-    public ResponseEntity<PostsAndCommentsResponseDto> postview(@RequestParam("category") String category, @RequestParam("id") Long id){
-        return ResponseEntity.ok()
-                .body(postsService.findPostAndCommentsById(id));
+    public ResponseEntity<?> postview(Model model, @RequestParam("category") String category, @RequestParam("id") Long id, @RequestParam("email") String email){
+
+        PostsAndCommentsResponseDto cmtList = postsService.findPostAndCommentsById(id);
+        model.addAttribute(cmtList);
+        model.addAttribute("userEmail", email);
+
+        return new ResponseEntity<>(model, HttpStatus.OK);
     }
 
     /* 게시글 조회 */
     // 댓글 페이징 조회
     @GetMapping("/view")
     public ResponseEntity<?> postview(Model model, @RequestParam("category") String category, @RequestParam("id") Long id
-    , @RequestParam(required = false, defaultValue = "0", value = "commentPage") int page, @LoginUser SessionUser user){
+            , @RequestParam(required = false, defaultValue = "0", value = "commentPage") int page, /*@LoginUser SessionUser user*/ @RequestParam("email") String email){
         PostsAndCommentsPageResponseDto cmtPage = null;
         cmtPage=postsService.findPostsAndCommentsWithPageById(id, page);
         model.addAttribute(cmtPage);
-        if (user != null) {
-            model.addAttribute("userEmail", user.getEmail());
-        }
+        model.addAttribute("userEmail", email);
+//        if (user != null) {
+//            model.addAttribute("userEmail", user.getEmail());
+//        }
 
         return new ResponseEntity<>(model, HttpStatus.OK);
     }
@@ -68,13 +73,15 @@ public class PostsApiController {
     @GetMapping("/list")
     public ResponseEntity<?> list(Model model, @RequestParam("category") String category, @RequestParam(required = false, defaultValue = "0", value = "page") int page){
         Page<?> listPage = null;
-        int totalPage;
+        int totalPage; Long totalElements;
         listPage = postsService.list(category, page);
 
         totalPage = listPage.getTotalPages();
+        totalElements = listPage.getTotalElements();
 
         model.addAttribute("posts", listPage.getContent());
         model.addAttribute("totalPage", totalPage);
+        model.addAttribute("totalElements", totalElements);
 
         return new ResponseEntity<>(model, HttpStatus.OK);
     }

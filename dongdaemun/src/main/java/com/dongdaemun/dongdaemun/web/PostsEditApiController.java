@@ -29,13 +29,15 @@ public class PostsEditApiController {
 
     @ResponseBody
     @GetMapping("/write")
-    public ResponseEntity<?> insertEditor(ModelMap model, @LoginUser SessionUser user, @RequestParam("category") String category) throws Exception {
-        if (user != null) {
-            model.addAttribute("userEmail", user.getEmail());
-            model.addAttribute("category", category);
-        }
+    public ResponseEntity<?> insertEditor(ModelMap model, @RequestParam("email") String email, /*@LoginUser SessionUser user,*/ @RequestParam("category") String category) throws Exception {
+//        if (user != null) {
+//            model.addAttribute("userEmail", user.getEmail());
+//            model.addAttribute("category", category);
+//        }
         //ModelAndView mav = new ModelAndView("smarteditor/newPost");
         //return mav;
+        model.addAttribute(email);
+        model.addAttribute(category);
 
         return new ResponseEntity<>(model, HttpStatus.OK);
     }
