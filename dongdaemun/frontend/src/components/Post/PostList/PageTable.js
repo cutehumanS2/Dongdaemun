@@ -30,7 +30,7 @@ const PageTable = (props) => {
     console.log(response.data);
     setPosts(response.data);
   };
- 
+
   const textLengthOverCut = (txt, len, lastTxt) => {
     if (len == "" || len == null) {
       // 기본값
@@ -45,6 +45,11 @@ const PageTable = (props) => {
     }
     return txt;
   };
+
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   var tabletitle = "게시판 이름";
 
