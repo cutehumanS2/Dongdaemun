@@ -1,5 +1,7 @@
 package com.dongdaemun.dongdaemun.web;
 
+import com.dongdaemun.dongdaemun.config.auth.LoginUser;
+import com.dongdaemun.dongdaemun.config.auth.dto.SessionUser;
 import com.dongdaemun.dongdaemun.service.posts.PostsService;
 import com.dongdaemun.dongdaemun.web.dto.posts.PostsAndCommentsPageResponseDto;
 import com.dongdaemun.dongdaemun.web.dto.posts.PostsAndCommentsResponseDto;
@@ -50,10 +52,16 @@ public class PostsApiController {
     /* 게시글 조회 */
     // 댓글 페이징 조회
     @GetMapping("/view")
-    public ResponseEntity<PostsAndCommentsPageResponseDto> postview(@RequestParam("category") String category, @RequestParam("id") Long id
-    , @RequestParam(required = false, defaultValue = "0", value = "commentPage") int page){
-        return ResponseEntity.ok()
-                .body(postsService.findPostsAndCommentsWithPageById(id, page));
+    public ResponseEntity<?> postview(Model model, @RequestParam("category") String category, @RequestParam("id") Long id
+    , @RequestParam(required = false, defaultValue = "0", value = "commentPage") int page, @LoginUser SessionUser user){
+        PostsAndCommentsPageResponseDto cmtPage = null;
+        cmtPage=postsService.findPostsAndCommentsWithPageById(id, page);
+        model.addAttribute(cmtPage);
+        if (user != null) {
+            model.addAttribute("userEmail", user.getEmail());
+        }
+
+        return new ResponseEntity<>(model, HttpStatus.OK);
     }
 
     /* 게시판 목록 조회 */
