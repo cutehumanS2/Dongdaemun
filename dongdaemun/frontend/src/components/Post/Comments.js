@@ -2,42 +2,44 @@ import React, { useState } from "react";
 import "./Comments.css";
 import axios from "axios";
 
-// const baseUrl = "http://localhost:8080";
-// const params = {category:[1], pid:[1], cid:[12]};
-// axios.get('http://localhost:8080/updateCmt', {
-//   params
-//   }
-// )
-// .then(function (response) {
-//   console.log(response);
-// })
-// .catch(function (error) {
-//   console.log(error);
-// })
-// .then(function () {
-//   // always executed
-// }); 
-
 const mockList = [
   {
     id: 1,
     title: "김눈송",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
+      "코스모스는 과거에 있었고, 현재에 있으며, 미래에 있을 그 모든 것이다. 이 책은 내가 직접 본 격렬한 역사의 한 단편이다.",
     replies: [
       {
         id: 1,
         title: "김눈송",
         content:
-          "BE THE QUEEN, RULE THE WORLD",
-        tag: "",
+          "어떤 행성에서 지적 생물이 성숙했다고 말할 수 있는 것은 그 생물이 자기의 존재 이유를 처음으로 알아냈을 때이다.",
       },
       {
         id: 2,
         title: "김눈송",
         content:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
-        tag: "",
+          "일생을 통계역학을 연구하며 보냈던 루트비히 볼츠만은 1906년, 스스로 목숨을 끊었다. 파울 에렌페스트가 그의 일을 이어받았고, 1933년에 자살했다. 이제 우리가 통계역학을 배울 차례다. ",
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: "김눈송",
+    content:
+      "'하늘은 사람 위에 사람 만들지 않았고, 사람 밑에 사람 만들지 않았다.' 라고들 말해진다. 이 책은 내가 직접 본 격렬한 역사의 한 단편이다.",
+    replies: [
+      {
+        id: 1,
+        title: "김눈송",
+        content:
+          "어떤 행성에서 지적 생물이 성숙했다고 말할 수 있는 것은 그 생물이 자기의 존재 이유를 처음으로 알아냈을 때이다.",
+      },
+      {
+        id: 2,
+        title: "김눈송",
+        content:
+          "역사란 무엇인가? 인류 사회의 “아(我)”와 “비아(非我)”의 투쟁이 시간으로 발전하고 공간으로 확대되는 심적(心的)활동 상태의 기록이니, 세계사라 하면 세계 인류가 그렇게 되어온 상태의 기록이요, 조선사라 하면 조선 민족이 이렇게 되어온 상태의 기록이다.",
       },
     ],
   },
@@ -103,7 +105,7 @@ const Comments = () => {
                         <div>
                           <div className="comment-title">{item.title}</div>
                           <div className="comment-content">{item.content}</div>
-                         
+                             
                         </div>
                       </li>
                       
@@ -113,7 +115,13 @@ const Comments = () => {
                     );
                   })}
                 </ul>
-                <div className="input-wrapper">
+                
+
+              </li>
+            );
+          })}
+        </ul>
+        <div className="input-wrapper">
                     <input className="input" placeholder="  댓글을 달아주세요" />
                     <button
                       className="submit"
@@ -122,11 +130,6 @@ const Comments = () => {
                       등록
                     </button>
                   </div>
-
-              </li>
-            );
-          })}
-        </ul>
       </div>
     </>
   );
