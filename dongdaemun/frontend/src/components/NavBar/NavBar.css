@@ -1,11 +1,14 @@
 .navBar {
   background-color: #c6e5f3;
+  font-weight: bold;
 }
 .nav-logo {
   position: relative;
   width: 130px;
   left: 0px;
   background-size: contain;
+  padding: 0.5rem;
+  font-weight: bold;
 }
 
 .mypage-btn {

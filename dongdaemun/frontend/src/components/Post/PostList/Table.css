@@ -1,4 +1,4 @@
- .tablecss {
+.tablecss {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -60,6 +60,20 @@
       margin-top: 0.1rem;
       margin-bottom: 0.1rem;
       border-bottom: 1px solid black;
+      padding-bottom: 1rem
+    }
+
+    .twolineposts {
+      display: flex;
+      height: 2.5rem;
+      width: 100%;
+      justify-content: space-between;
+      flex-direction: row;
+      align-items: center;
+      padding: 1rem;
+      margin-top: 0.1rem;
+      margin-bottom: 0.1rem;
+      border-bottom: 1px solid black;
       padding-bottom: 3rem
     }
 
@@ -102,4 +116,16 @@
     padding : 1%;
     font-size: 130%;
     align-content: center;
+  }
+
+  a:link {
+    color : black
+  }
+
+  a:hover {
+    color : #084a83
+  }
+  
+  a:visited {
+    color : black
   }

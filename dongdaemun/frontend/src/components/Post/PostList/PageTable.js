@@ -74,7 +74,7 @@ const PageTable = (props) => {
           <a
             href={`readpost/${category}/${post.id}`}
             style={{ textDecoration: "none" }}
-            className="posts"
+            className="twolineposts"
           >
             <div className="downpostleft">
               <div>{post.title}</div>
