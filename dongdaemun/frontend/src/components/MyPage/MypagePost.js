@@ -7,8 +7,7 @@ import axios from "axios";
 const MyPagePost = () => {
   const [posts, setPosts] = useState({})
   const email="seohyeon0319@sookmyung.ac.kr"
-  const baseUrl = "http://localhost:8080";
-
+  const baseUrl = "http://ec2-15-165-95-188.ap-northeast-2.compute.amazonaws.com:8080";
   const getData = async() => {
     const headers = {
       "Content-Type": "application/json"

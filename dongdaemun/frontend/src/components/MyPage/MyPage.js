@@ -12,8 +12,8 @@ function MyPage() {
   const [comments, setComments] = useState();
   
   const email="seohyeon0319@sookmyung.ac.kr"
-  // const baseUrl = "http://ec2-15-165-95-188.ap-northeast-2.compute.amazonaws.com:8080";
-  const baseUrl = "http://localhost:8080";
+  const baseUrl = "http://ec2-15-165-95-188.ap-northeast-2.compute.amazonaws.com:8080";
+  // const baseUrl = "http://localhost:8080";
   const getData = async () => {
     const response = await axios.get(baseUrl+'/mypage?email='+email);
     setName(response.data.myProfileResponseDto.name);
