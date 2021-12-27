@@ -6,6 +6,7 @@ import { Link, useLocation, useParams, useNavigate } from "react-router-dom";
 import Recommend from "./Comments";
 import axios from "axios";
 import queryString from "query-string";
+import parse from 'html-react-parser';
 
 function ReadPost() {
   const email="seohyeon0319@sookmyung.ac.kr"
@@ -61,7 +62,8 @@ function ReadPost() {
             <div className="post-title">{posts.title}</div>
             <div className="post-writer">{posts.uid}</div>
             <div className="post-date">{posts.createDate2}</div>
-            <div className="post-text">{posts.content}</div>
+            <div className="post-text">{parse(posts.content)}</div>
+            {/* <div className="post-text">{posts.content}</div> */}
           </div>
         )}
       </div>

@@ -14,6 +14,7 @@ import {
 } from "react-router-dom";
 import pagination from "./Pagination";
 import "./Pagination.css";
+import parse from 'html-react-parser';
 
 const PageTable = (props) => {
   let { category } = useParams();
@@ -77,7 +78,7 @@ const PageTable = (props) => {
           >
             <div className="downpostleft">
               <div>{post.title}</div>
-              <div>{textLengthOverCut(text, 9, "...")}</div>
+              <div>{parse(textLengthOverCut(text, 9, "..."))}</div>
             </div>
             <div className="downpostright">
               <div>{post.createDate2}</div>
