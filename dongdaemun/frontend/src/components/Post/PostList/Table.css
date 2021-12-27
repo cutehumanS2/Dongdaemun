@@ -125,3 +125,7 @@
   a:hover {
     color : #084a83
   }
+  
+  a:visited {
+    color : black
+  }
