@@ -1,5 +1,6 @@
 .navBar {
   background-color: #c6e5f3;
+  font-weight: bold;
 }
 .nav-logo {
   position: relative;
@@ -18,6 +19,8 @@
   border-color: #ffffe7;
   border: 0;
   border-radius: 40px !important;
+  padding: 0.5rem;
+  font-weight: bold;
 }
 
 .nav-link {
