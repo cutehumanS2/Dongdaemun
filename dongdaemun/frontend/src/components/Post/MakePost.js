@@ -1,12 +1,14 @@
 import React from 'react'
 import axios from "axios"
 import { useState } from 'react';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
+import { CKEditor} from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import './MakePost.css'
-import {useParams} from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
+
 
 function MakePost(props) {
+ 
   let {category} = useParams();
   console.log("넘어오는 데이터: ", category);
   
@@ -23,6 +25,7 @@ function MakePost(props) {
     category: category,
     anony: false
   })
+  let navigate = useNavigate();
   const onSubmit = async () => {
     const headers = {
       "Content-Type": "application/json"
@@ -32,8 +35,10 @@ function MakePost(props) {
     setPostContent(response.data);
     setPostContent("");  
     setTitle("");
+    navigate(-1);
   };
   
+
   return (
     <div className='MakePost'>
       <input value={title} onChange={handleTitle}
@@ -41,12 +46,13 @@ function MakePost(props) {
       </input>
       <CKEditor
         editor={ ClassicEditor }
-        data="<p> </p>"        
+        data="<p></p>"        
         onChange={ ( event, editor ) => {
             const data = editor.getData();
             console.log(data)
             setPostContent(data);
         } }
+
       />
       <button className='btn' onClick={onSubmit}>업로드</button>
     </div>

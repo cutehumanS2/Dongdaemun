@@ -1,11 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import Pagination from '../Post/PostList/Pagination';
-import { paginate } from '../Post/PostList/paginate';
 import "../Post/PostList/Table.css"
 import axios from "axios";
 
 const MyPageComment = () => {
-  const [posts, setPosts] = useState();
+  const [posts, setPosts] = useState({})
   const email="seohyeon0319@sookmyung.ac.kr"
   const baseUrl = "http://localhost:8080";
 
@@ -27,12 +25,12 @@ const MyPageComment = () => {
     return (
       <div className='post' key={post.id}>
         <a
-            href={`readpost/${post.category}/${post.id}`}
+            href={`pagetable/readpost/${post.category}/${post.id}`}
             style={{ textDecoration: "none" }}
             className="posts"
           >
         <div>{post.title}</div>
-        <div>{post.createDate}</div>
+        <div>{post.createDate2}</div>
         </a>
       </div>
     )

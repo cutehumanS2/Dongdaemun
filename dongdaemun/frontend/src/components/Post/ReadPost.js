@@ -8,6 +8,7 @@ import axios from "axios";
 import queryString from "query-string";
 
 function ReadPost() {
+  const email="seohyeon0319@sookmyung.ac.kr"
 
   let { category, id } = useParams();
   console.log("넘어오는 카테고리: ", category);
@@ -21,12 +22,12 @@ function ReadPost() {
       "Content-Type": "application/json",
     };
     const response = await axios.get(
-      baseURL + "/view?category=" + category + "&id=" + id + "&page=0"
+      baseURL + "/view?category=" + category + "&id=" + id + "&page=0"+"&email=" + email
       
     );
     console.log(response.data);
 
-    setPosts({ posts, ...response.data.posts });
+    setPosts({ posts, ...response.data.postsAndCommentsPageResponseDto.posts });
   };
   console.log("출력!!!!" + posts);
 
@@ -38,7 +39,7 @@ function ReadPost() {
   let navigate = useNavigate()
   const postDelete = () => {
     axios
-      .delete(baseURL + "/delete?category=" + category + "&id=" + id)
+      .delete(baseURL + "/delete?category=" + category + "&id=" + id +"&email=" + email)
       .then(function (response) {
         console.log(response);
       })

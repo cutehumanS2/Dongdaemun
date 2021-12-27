@@ -1,12 +1,13 @@
 import React from 'react';
 import "./LandingPage.css";
 import { Button } from "react-bootstrap";
+import logoImg from '../../img/ddm_logo.png';
 
 function LandingPage() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src="img/ddm_logo.png" className="logo-img" alt="logo" />
+        <img src={logoImg} className="logo-img" alt="logo" />
         <p className="logo-name">Dongdaemoon</p>
         <p className="logo-explain">동아리 대문을 열어라</p>
         <a href='/oauth2/authorization/google'>
